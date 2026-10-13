@@ -37,7 +37,10 @@ func save_progress(progress: Dictionary) -> Error:
 		return FileAccess.get_open_error()
 	file.store_string(JSON.stringify(document))
 	file.flush()
+	var write_error = file.get_error()
 	file.close()
+	if write_error != OK:
+		return write_error
 	if FileAccess.file_exists(path):
 		var backup_error = DirAccess.copy_absolute(path, path + ".bak")
 		if backup_error != OK:
