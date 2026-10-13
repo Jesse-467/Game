@@ -1,0 +1,59 @@
+{
+  "art_direction": "Western fantasy, chibi, painted cel shading",
+  "assets": [
+    {
+      "id": "knight",
+      "tool": "built-in image_gen",
+      "path": "assets/characters/knight.png",
+      "prompt": "Use case: stylized-concept. Asset type: production-ready transparent full-body game sprite for an Android top-down 2D chibi Western fantasy action roguelite named Ember Hero. Subject: a brave young holy knight, oversized rounded head and small body, silver plate armor with gold trim, short navy-blue cape, small straight golden sword in right hand and compact round shield on left arm, kind determined expression. Style: polished hand-painted 2D mobile RPG sprite, soft cel shading, clean dark outline, readable silhouette at 64 pixels, no pixel art, no realistic anatomy. Camera: orthographic three-quarter top-down game view, facing slightly toward the bottom-right, entire body and equipment visible, character upright and centered, occupies 80 percent of canvas, generous transparent padding. Lighting: soft upper-left highlights, warm gold and slate blue palette. Background: actual transparent alpha. Constraints: exactly one character, no backdrop, no ground plane, no cast shadow detached from feet, no UI, no text, no labels, no watermark, no other objects, no frame. This is an in-game sprite, not a concept sheet or poster."
+    },
+    {
+      "id": "mage",
+      "tool": "built-in image_gen",
+      "path": "assets/characters/mage.png",
+      "prompt": "Use case: stylized-concept. Asset type: one production-ready full-body transparent sprite for an Android top-down 2D chibi Western fantasy RPG. Use the reference knight ONLY to match polished hand-painted cel shading, oversized head / small body proportions, clean dark outlines and upper-left soft highlights. Create a NEW subject, not a knight edit. Orthographic three-quarter top-down game camera, facing toward bottom-right, entire subject centered and contained with 12 percent transparent padding. Readable silhouette at 64px, no pixel art, no realistic anatomy, no backdrop, no ground, no UI, no text, no watermark, exactly one subject. Actual transparent alpha.\nSubject: A cheerful young ice mage with silver-white hair, violet eyes, a short rounded deep-blue wizard hat, cyan and navy robes with tiny silver stars, holding a compact staff crowned by a pale-blue ice crystal. Brave companion to the knight. Whole body."
+    },
+    {
+      "id": "ranger",
+      "tool": "built-in image_gen",
+      "path": "assets/characters/ranger.png",
+      "prompt": "Use case: stylized-concept. Asset type: one production-ready full-body transparent sprite for an Android top-down 2D chibi Western fantasy RPG. Use the reference knight ONLY to match polished hand-painted cel shading, oversized head / small body proportions, clean dark outlines and upper-left soft highlights. Create a NEW subject, not a knight edit. Orthographic three-quarter top-down game camera, facing toward bottom-right, entire subject centered and contained with 12 percent transparent padding. Readable silhouette at 64px, no pixel art, no realistic anatomy, no backdrop, no ground, no UI, no text, no watermark, exactly one subject. Actual transparent alpha.\nSubject: A confident young woodland elf ranger with short chestnut hair, pointed ears, forest-green hooded cloak, leather tunic, compact golden wooden bow held at side, a quiver on the back. Brave companion to the knight. Whole body."
+    },
+    {
+      "id": "slime",
+      "tool": "built-in image_gen",
+      "path": "assets/enemies/slime.png",
+      "prompt": "Use case: stylized-concept. Asset type: one production-ready full-body transparent sprite for an Android top-down 2D chibi Western fantasy RPG. Use the reference knight ONLY to match polished hand-painted cel shading, oversized head / small body proportions, clean dark outlines and upper-left soft highlights. Create a NEW subject, not a knight edit. Orthographic three-quarter top-down game camera, facing toward bottom-right, entire subject centered and contained with 12 percent transparent padding. Readable silhouette at 64px, no pixel art, no realistic anatomy, no backdrop, no ground, no UI, no text, no watermark, exactly one subject. Actual transparent alpha.\nSubject: A cute but hostile moss-green slime monster, round gelatinous squishy body, two expressive dark eyes, small fanged mouth, a tiny moss sprout on top, shiny green highlights. It should look like an enemy in the same Western fantasy chibi world. Simple low silhouette."
+    },
+    {
+      "id": "bat",
+      "tool": "built-in image_gen",
+      "path": "assets/enemies/bat.png",
+      "prompt": "Use case: stylized-concept. Asset type: one production-ready transparent full-body enemy sprite in a top-down 2D Western fantasy chibi mobile RPG. Use reference knight solely for unified hand-painted cel shading, clean dark outlines, oversized expressive face, small body, rich highlights, readable 64px silhouette. Orthographic three-quarter top-down camera; face bottom-right, exactly one whole subject upright centered, 12% transparent padding. No backdrop, floor, text, UI, watermark or concept sheet. Actual transparent alpha. Enemy should appear hostile but playful, suitable for all-ages fantasy, no gore.\nSubject: A small purple night bat monster with large ears, glowing amber eyes, tiny fangs and two spread rounded wings. It flutters, whole body visible. Violet and dark plum colors."
+    },
+    {
+      "id": "skeleton",
+      "tool": "built-in image_gen",
+      "path": "assets/enemies/skeleton.png",
+      "prompt": "Use case: stylized-concept. Asset type: one production-ready transparent full-body enemy sprite in a top-down 2D Western fantasy chibi mobile RPG. Use reference knight solely for unified hand-painted cel shading, clean dark outlines, oversized expressive face, small body, rich highlights, readable 64px silhouette. Orthographic three-quarter top-down camera; face bottom-right, exactly one whole subject upright centered, 12% transparent padding. No backdrop, floor, text, UI, watermark or concept sheet. Actual transparent alpha. Enemy should appear hostile but playful, suitable for all-ages fantasy, no gore.\nSubject: An animated cute ivory skeleton soldier with an oversized skull, glowing teal eyes, rusty dark steel helmet, worn round wooden shield and small chipped sword. Fully visible short body, bones stylized and friendly-spooky."
+    },
+    {
+      "id": "shaman",
+      "tool": "built-in image_gen",
+      "path": "assets/enemies/shaman.png",
+      "prompt": "Use case: stylized-concept. Asset type: one production-ready transparent full-body enemy sprite in a top-down 2D Western fantasy chibi mobile RPG. Use reference knight solely for unified hand-painted cel shading, clean dark outlines, oversized expressive face, small body, rich highlights, readable 64px silhouette. Orthographic three-quarter top-down camera; face bottom-right, exactly one whole subject upright centered, 12% transparent padding. No backdrop, floor, text, UI, watermark or concept sheet. Actual transparent alpha. Enemy should appear hostile but playful, suitable for all-ages fantasy, no gore.\nSubject: A small evil hooded goblin shaman with oversized purple hood, green face, bright amber eyes, tattered violet robe, dark wooden staff crowned with a floating magenta crystal. Whole body, clearly a ranged enemy."
+    },
+    {
+      "id": "knight_sheet",
+      "tool": "built-in image_gen",
+      "path": "assets/animations/knight.png",
+      "prompt": "Use case: stylized-concept. Asset type: PRODUCTION ANIMATION SPRITE SHEET for a mobile 2D top-down Western fantasy action RPG. Reference image is the character identity reference, the holy knight with blond hair, silver/gold armor, blue cape, sword and shield. Create an animation sheet of this SAME knight, not a portrait. Output a square canvas, exact uniform grid of 4 COLUMNS x 4 ROWS = 16 separate full-body frames on real transparent alpha. Each frame occupies its own equal square cell, exact same character scale, aligned feet baseline, fixed camera and centered root position. Generous 15% empty padding inside EVERY cell, nothing crosses cell borders. Camera: orthographic three-quarter game view, character facing right and slightly toward bottom of screen. Style matches reference: polished chibi, very large head, short body, crisp dark outlines, simplified cel shading readable when each frame is reduced to 128x128 pixels. ROW 1: 4 frames idle breathing, subtle cloak movement. ROW 2: 4 distinct frames of RUNNING, left-leg forward, passing feet, right-leg forward, passing feet, arms and cloak counter-swing. ROW 3: 4 distinct ATTACK frames, sword raised windup, sword sweeping forward, slash follow-through, return to ready. ROW 4: 4 distinct HURT frames, initial recoil, backward flinch, recovery, ready again. All limbs and sword MUST be fully visible in every cell. No perspective changes, no change of costume, no duplicates masquerading as animation, no labels, no text, no grid lines, no shadows behind character, no backdrop. Transparent alpha must separate every frame. Intended source resolution 1024x1024; game imports it as 512x512, with 128x128 cells."
+    },
+    {
+      "id": "mage_sheet",
+      "tool": "built-in image_gen",
+      "path": "assets/animations/mage.png",
+      "prompt": "Use case: stylized-concept. Asset type: mobile game ANIMATION SPRITE SHEET. Image 1 is the character identity reference; image 2 is ONLY an example of the required 4x4 grid and hand-painted chibi shading. Generate a square canvas with EXACTLY 4 columns x 4 rows =16 distinct full-body animation frames on actual transparent alpha. Same character scale and fixed three-quarter orthographic game camera in all cells, facing bottom-right. Each frame must stay inside the CENTRAL 70% of its cell; preserve at least 15% empty padding on all sides, including weapons, limbs, cape and effects. Uniform cell centers and aligned feet. Readable at 128x128 per frame, simplified clean dark outlines, rich cel shading. ROW1 idle breathing frames. ROW2 four DIFFERENT walk/run phases (left leg forward, feet passing, right leg forward, feet passing). ROW3 four DIFFERENT attack phases (windup, release, follow-through, recover). ROW4 four DIFFERENT hurt/recoil/recovery phases ending at neutral. No text, no grid lines, no labels, no backdrop, no floor or detached shadows. Entire limbs and weapons remain in their own cell. Intended source1024x1024, runtime512x512.\nSubject and motion: Same silver-haired blue-robed ice mage. Attack animation: lift ice staff, swing staff and emit a small ice sparkle, follow through, ready. Walk with alternating feet, robes swing; hurt: flinch backward, recover."
+    }
+  ]
+}

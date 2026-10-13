@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-13",
+  "generation_prompt_record": "generated-art.json preserves available original prompts; some sheets were subsequently revised for frame padding",
+  "assets": [
+    {
+      "path": "assets/characters/knight.png",
+      "category": "characters",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 1340152,
+      "sha256": "7c7ca64da247d359c3d91583b8ec28db5ba964833ecb9295b4a0107531bc4bea",
+      "role": "camp portrait"
+    },
+    {
+      "path": "assets/characters/mage.png",
+      "category": "characters",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 1571528,
+      "sha256": "36173ce08478ce7a7f267b62450dfa62504dccbbe0a07882e4b1364465d0a152",
+      "role": "camp portrait"
+    },
+    {
+      "path": "assets/characters/ranger.png",
+      "category": "characters",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 1320881,
+      "sha256": "d86ab5bbe0a7268225f5e60d062df3a8b5f66eefb107275c27003933f2e8fb81",
+      "role": "camp portrait"
+    },
+    {
+      "path": "assets/animations/bat.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 1856637,
+      "sha256": "25c519fb80a6425b6af5f1385ccaaa2b90e4f653e79aa6cf42868da2668b3350",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/boss_lich.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 2535108,
+      "sha256": "57aa0b0e4d31b341df7d80f160c07d34dfff7537b27990c1fd850436cfdbe1d3",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/boss_ogre.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 1471079,
+      "sha256": "db84bd4c21b8f2f993b2cf977740bf508b96409e63ddef11b70cf98f5b7d58cc",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/boss_wyrm.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 2220044,
+      "sha256": "6dd0a120e139555ef09785e7800699da858cd0d705e49e46e89530869af6ca19",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/charger.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 1802236,
+      "sha256": "3ea898dfd3d649399b661c9bbbf9e57f4507ef1d52490195b26ebe2594e2c85d",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/elite_guard.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 2249107,
+      "sha256": "a2ef064eda17e805dc79cb14e5492ccf79e0d9c1dce6ee16bf2b0dcb8bbded37",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/knight.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 1433506,
+      "sha256": "5a4bcb9dcb9fc25866c3fa03541ad133b6445317eb04646dbfe8c63a1dfce899",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/mage.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 1597303,
+      "sha256": "2a5240e2fd4cfc3342b90db802e121102aadf7104dd5756ded5da2fe658fc45e",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/ranger.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 2317221,
+      "sha256": "ca59c98816800a24c3fea864c701bf72306bb1fb0ec2dbc9f111c7c9e8b2c038",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/shaman.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 2319806,
+      "sha256": "efa86800ac9528b5b319d5c44b53f85c7c06a51d941288f5208d31dc77be5496",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/skeleton.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 2165981,
+      "sha256": "10649fbbb4bffc039715556df085aae3b5eaba2d5f994df1faa05b327ce1009d",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/animations/slime.png",
+      "category": "animations",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 1776482,
+      "sha256": "39c39f92327cc357c12838174a322d0b8f70a7587ec45a5f800ed472153db354",
+      "role": "idle, movement, attack, hurt sprite sheet"
+    },
+    {
+      "path": "assets/environment/arena.png",
+      "category": "environment",
+      "source": "Project imagegen session, 2026-10-07",
+      "bytes": 2298624,
+      "sha256": "6aa8f66a30e22c0319c554f8d62aae0e264ce3268bcea88256b5c4703f06e8c7",
+      "role": "archived0.4 courtyard; current world uses world-floor.png"
+    },
+    {
+      "path": "assets/audio/attack.wav",
+      "category": "audio",
+      "source": "Original synthesis: tools/compose_audio.py",
+      "bytes": 4454,
+      "sha256": "3c6a3417575b7acbc87a7869bbce2006e546a8403474bd55286cef77214f1cb0",
+      "role": "music or combat cue"
+    },
+    {
+      "path": "assets/audio/boss.wav",
+      "category": "audio",
+      "source": "Original synthesis: tools/compose_audio.py",
+      "bytes": 37528,
+      "sha256": "c748adaa608d97f411d8143e16b1f59dd12cd841a40b63cac43edb21901207bb",
+      "role": "music or combat cue"
+    },
+    {
+      "path": "assets/audio/dash.wav",
+      "category": "audio",
+      "source": "Original synthesis: tools/compose_audio.py",
+      "bytes": 5776,
+      "sha256": "81d4f1aac40d7971dba9f48ffd23e43ecbfa27087be2ed8fdba4d11a9d1814a2",
+      "role": "music or combat cue"
+    },
+    {
+      "path": "assets/audio/death.wav",
+      "category": "audio",
+      "source": "Original synthesis: tools/compose_audio.py",
+      "bytes": 48554,
+      "sha256": "3d6cdba5500ac9ed64b3f3a4996fa55a3d96438a992457a494075878d7a2bd84",
+      "role": "music or combat cue"
+    },
+    {
+      "path": "assets/audio/expedition.wav",
+      "category": "audio",
+      "source": "Original synthesis: tools/compose_audio.py",
+      "bytes": 1411244,
+      "sha256": "c3187d5743e0eda9b04f03096c0e220f0923d9e9a1fb9a8857f3502cfb23116f",
+      "role": "music or combat cue"
+    },
+    {
+      "path": "assets/audio/hurt.wav",
+      "category": "audio",
+      "source": "Original synthesis: tools/compose_audio.py",
+      "bytes": 8864,
+      "sha256": "d430fbf4e88c76fadc02ec2faff8d6c68f9ed5b4b412a0e9031971f623ffef3c",
+      "role": "music or combat cue"
+    },
+    {
+      "path": "assets/audio/skill.wav",
+      "category": "audio",
+      "source": "Original synthesis: tools/compose_audio.py",
+      "bytes": 22094,
+      "sha256": "0385d42700c33fefa79c911d90722ffaa267791cb5be5cf610bcbe41a42e4de0",
+      "role": "music or combat cue"
+    },
+    {
+      "path": "assets/audio/upgrade.wav",
+      "category": "audio",
+      "source": "Original synthesis: tools/compose_audio.py",
+      "bytes": 30914,
+      "sha256": "43dd57febce7b6820855825e2cd2358040c8749b2fc8500b431f047395736692",
+      "role": "music or combat cue"
+    },
+    {
+      "path": "assets/fonts/NotoSansSC.ttf",
+      "category": "fonts",
+      "source": "Google Fonts / Noto Sans SC",
+      "bytes": 17772300,
+      "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+      "role": "bundled Chinese UI font; OFL-1.1"
+    },
+    {
+      "path": "assets/environment/world-floor.png",
+      "category": "environment",
+      "source": "Project imagegen session, 2026-10-13; exact prompts in world-art-0.6.json",
+      "bytes": 2943620,
+      "sha256": "ece243ed562cf4a16bc42edf4b4822303b64f3cb233beceb107cf48ecf91660a",
+      "role": "large-world ground texture; 512px import"
+    },
+    {
+      "path": "assets/environment/field-atlas.png",
+      "category": "environment",
+      "source": "Project imagegen session, 2026-10-13; exact prompts in world-art-0.6.json",
+      "bytes": 2926952,
+      "sha256": "c416f4542e48e98421a333763a2bd86493e828fa7e046777941ce6748ef69ebd",
+      "role": "eight terrain states; shared1024px atlas"
+    }
+  ]
+}

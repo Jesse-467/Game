@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-13",
+  "generator": "OpenAI imagegen built-in tool",
+  "assets": [
+    {
+      "path": "assets/environment/world-floor.png",
+      "source_path": "C:/Users/27117/.codex/generated_images/01a111ef-00ad-7ca1-99f4-7a7cd8a1e0c0/exec-321883a3-a08e-455c-afb1-4c194c7beb3b.png",
+      "prompt": "Use case: texture asset for an Android top-down 2D chibi western fantasy roguelite. Generate ONE seamless tileable square ground texture, viewed perfectly vertically from above, no perspective. A beautiful hand-painted abandoned castle cobblestone floor: small slate blue-gray paving stones, varied irregular joints, subtle moss flecks, worn cracks and faint scratches. Stylized painted detail matching cute high-quality medieval fantasy game sprites. Muted cool mid-dark colors, locally even diffuse lighting so gameplay sprites and orange danger telegraphs remain easy to see. Texture must tile seamlessly on all four edges; stones extend across each edge. No walls, no border, no centerpiece, no emblems, no characters, no props, no shadows from unseen objects, no UI, no text. Mobile asset designed to import at 512x512 and repeat over a large 3600x2400 world; prioritize readable stone forms over tiny high-frequency detail. Full opaque coverage.",
+      "runtime_size_limit": 512,
+      "role": "repeatable large-world cobblestone floor"
+    },
+    {
+      "path": "assets/environment/field-atlas.png",
+      "source_path": "C:/Users/27117/.codex/generated_images/01a111ef-00ad-7ca1-99f4-7a7cd8a1e0c0/exec-e19205db-c2b7-4d82-9c56-9790b30a9672.png",
+      "prompt": "Use case: production environment sprite sheet for an Android top-down 2D chibi western fantasy roguelite. Generate ONE transparent terrain-effects atlas, eight equal cells arranged EXACTLY 4 columns by 2 rows. Each cell contains exactly ONE circular magical ground patch, perfectly top-down and flat, centered and the same footprint size. Clear transparent gutters, at least 12 percent padding around each patch inside its cell, no effects may cross cell boundaries. High quality hand-painted fantasy game assets, readable at 220 pixels per patch, muted translucent centers and decorated edges so characters remain readable. No characters, no perspective, no labels, no text, no cell borders, no black/white background. Upper row left to right: (1) cold blue ice-frost cracked crystal ground, sixfold frost sigil, (2) warm gold holy hawk-eye blessing circle with eye sigil and subtle sun runes, (3) purple void corrupted ground with cracks and dark vortex sigil, (4) jade green resonance blessing circle with rippling concentric runes. Lower row left to right: (5) burnt orange ember ground patch with small edge flames and molten cracks, (6) dim indigo mist/blindness ground with crossed-eye sigil and smoky edges, (7) red-gold battle-fury blessing circle with sword/flame sigil, (8) cyan and mint protective ward circle with shield sigil and stone-rune edge. Keep all patches genuinely circular, alpha fading out at their outside edges and mostly transparent in their centers. ONE coherent sheet, a wide landscape atlas, strict uniform 4 by 2 layout; each patch recognizable as a different terrain state, painted detail and no vector placeholder appearance. Designed to import as a single mobile 1024px atlas and share texture memory.",
+      "runtime_size_limit": 1024,
+      "role": "4x2 atlas for eight terrain effects",
+      "order": [
+        "frost_ground",
+        "keen_ground",
+        "void_ground",
+        "control_ground",
+        "ember_ground",
+        "blind_ground",
+        "fury_ground",
+        "ward_ground"
+      ]
+    }
+  ]
+}

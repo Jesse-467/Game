@@ -1,0 +1,21 @@
+{
+  "schema_version": 2,
+  "schedule": {
+    "starting_node": 3, "node_grace_seconds": 8.0,
+    "warning_seconds": 3.0, "active_min_seconds": 32.0, "active_max_seconds": 48.0,
+    "recovery_seconds": 6.0, "preview_seconds": 6.0,
+    "minimum_zone_count": 3, "early_maximum_zone_count": 4, "maximum_zone_count": 5,
+    "radius_min": 110.0, "radius_max": 155.0, "max_visible_coverage": 0.38
+  },
+  "rotation": ["frost_ground", "keen_ground", "void_ground", "control_ground", "ember_ground", "blind_ground", "fury_ground", "ward_ground"],
+  "afflictions": [
+    {"id":"frost_ground","name":"寒霜地脉","kind":"debuff","summary":"移速-25%","color":"82d7ef","atlas_index":0,"move_multiplier":0.75},
+    {"id":"keen_ground","name":"鹰眼圣阵","kind":"buff","summary":"暴击率+25点","color":"ecd18b","atlas_index":1,"crit_chance_delta":0.25},
+    {"id":"void_ground","name":"虚蚀结界","kind":"debuff","summary":"输出-30%","color":"c292e6","atlas_index":2,"outgoing_damage_multiplier":0.70},
+    {"id":"control_ground","name":"共鸣法阵","kind":"buff","summary":"控制时长+50%","color":"a6dab8","atlas_index":3,"control_duration_multiplier":1.5},
+    {"id":"ember_ground","name":"烬火侵蚀","kind":"debuff","summary":"每秒6点伤害","color":"f3a074","atlas_index":4,"tick_damage":6.0,"tick_interval_seconds":1.0},
+    {"id":"blind_ground","name":"迷视结界","kind":"debuff","summary":"暴击率-20点","color":"959dce","atlas_index":5,"crit_chance_delta":-0.20},
+    {"id":"fury_ground","name":"战意圣阵","kind":"buff","summary":"攻击间隔-20%","color":"f7a257","atlas_index":6,"attack_interval_multiplier":0.80},
+    {"id":"ward_ground","name":"守护法阵","kind":"buff","summary":"承伤-25%","color":"80d7d2","atlas_index":7,"incoming_damage_multiplier":0.75}
+  ]
+}

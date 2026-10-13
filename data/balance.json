@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "status": "computer_simulation_checked_pending_playtest",
+  "player": {
+    "starting_level": 1,
+    "max_hp": 100,
+    "move_speed": 230.0,
+    "attack_damage": 12.0,
+    "attack_interval_seconds": 0.65,
+    "hurt_invulnerability_seconds": 0.65,
+    "pickup_radius": 70.0
+  },
+  "experience": {
+    "base": 8.0,
+    "linear_per_level": 4.0,
+    "power_coefficient": 1.2,
+    "power_exponent": 1.25
+  },
+  "difficulty": {
+    "hp_growth_per_minute": 0.10,
+    "damage_growth_per_minute": 0.035,
+    "speed_multiplier_cap": 1.25,
+    "node_duration_seconds": 40.0,
+    "boss_every_nodes": 5,
+    "elite_node_in_cycle": 3,
+    "elite_spawn_chance": 0.18,
+    "node_heal_fraction": 0.08,
+    "max_active_enemies": 120,
+    "spawn_interval_start_seconds": 1.15,
+    "spawn_interval_floor_seconds": 0.40,
+    "spawn_growth_per_minute": 0.10,
+    "spawn_distance_min": 240.0,
+    "spawn_distance_max": 470.0,
+    "boss_hp_growth_per_rotation": 0.85,
+    "pacing_recovery_seconds": 8.0,
+    "pacing_peak_start_seconds": 25.0,
+    "pacing_peak_end_seconds": 34.0,
+    "pacing_recovery_multiplier": 1.65,
+    "pacing_peak_multiplier": 0.72,
+    "boss_mob_interval_multiplier": 2.4
+  },
+  "abilities": {
+    "dash_cooldown_seconds": 3.0,
+    "dash_duration_seconds": 0.20,
+    "dash_speed": 750.0,
+    "dash_immunity_seconds": 0.30,
+    "skill_cooldown_seconds": 8.0,
+    "skill_radius": 165.0,
+    "skill_damage_multiplier": 3.0
+  }
+}

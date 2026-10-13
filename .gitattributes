@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.png binary
+*.ttf binary
+*.wav binary
+*.zip binary
+assets/environment/tiny-dungeon/** -text -whitespace
+assets/licenses/*-OFL.txt -text -whitespace

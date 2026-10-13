@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "enemies": [
+    {"id":"slime","name":"苔绿史莱姆","kind":"normal","behavior":"chase","sprite_tile":108,"hp":24,"speed":75,"damage":8,"radius":16,"xp":3,"weight":5,"min_node":1},
+    {"id":"bat","name":"夜翼蝠","kind":"normal","behavior":"chase","sprite_tile":120,"hp":16,"speed":122,"damage":6,"radius":14,"xp":3,"weight":2,"min_node":2},
+    {"id":"skeleton","name":"骸骨卫兵","kind":"normal","behavior":"chase","sprite_tile":122,"hp":48,"speed":58,"damage":12,"radius":20,"xp":5,"weight":2,"min_node":3},
+    {"id":"shaman","name":"邪术师","kind":"normal","behavior":"ranged","sprite_tile":121,"hp":28,"speed":63,"damage":9,"radius":17,"xp":5,"weight":1,"min_node":4,"attack":{"type":"bolt","warning":0.65,"interval":3.2,"speed":185,"range":260}},
+    {"id":"charger","name":"赤角突袭者","kind":"normal","behavior":"charge","sprite_tile":110,"hp":34,"speed":73,"damage":13,"radius":18,"xp":5,"weight":1,"min_node":6,"attack":{"type":"charge","warning":0.85,"interval":4.5,"speed":340,"duration":0.55}},
+    {"id":"elite_guard","name":"精英 · 诅咒卫士","kind":"elite","behavior":"charge","sprite_tile":124,"hp":110,"speed":64,"damage":16,"radius":25,"xp":12,"weight":1,"min_node":3,"attack":{"type":"charge","warning":1.0,"interval":4.6,"speed":285,"duration":0.65}},
+    {"id":"boss_ogre","name":"第一灾厄 · 破城魔像","kind":"boss","behavior":"boss","sprite_tile":110,"hp":360,"speed":44,"damage":20,"radius":38,"xp":40,
+      "attacks":[{"type":"slam","warning":1.15,"interval":3.8,"radius":90,"damage":22},{"type":"charge","warning":1.1,"interval":4.3,"speed":270,"duration":0.7,"damage":18}],
+      "phases":[
+        {"id":"fracture","name":"裂地震波","hp_below":0.5,"min_rotation":0,"attacks":[{"type":"shockwave","warning":1.3,"interval":4.2,"inner_radius":110,"radius":190,"damage":20},{"type":"charge","warning":1.2,"interval":4.4,"speed":275,"duration":0.65,"damage":18},{"type":"slam","warning":1.15,"interval":3.8,"radius":90,"damage":22}]},
+        {"id":"fracture_return","name":"深层裂地","hp_below":0.5,"min_rotation":1,"attacks":[{"type":"shockwave","warning":1.3,"interval":4.2,"inner_radius":115,"radius":200,"damage":20},{"type":"slam","warning":1.3,"interval":4.3,"radius":55,"damage":20,"offsets":[[-95,0],[0,0],[95,0]]},{"type":"charge","warning":1.2,"interval":4.4,"speed":285,"duration":0.65,"damage":18}]}
+      ]},
+    {"id":"boss_lich","name":"第二灾厄 · 骸骨君主","kind":"boss","behavior":"boss","sprite_tile":124,"hp":600,"speed":38,"damage":18,"radius":38,"xp":55,
+      "attacks":[{"type":"fan","warning":1.0,"interval":4.2,"speed":180,"count":7,"spread":2.4,"damage":12},{"type":"summon","warning":1.2,"interval":5.2,"count":4,"enemy_id":"skeleton"}],
+      "phases":[
+        {"id":"soul_circle","name":"灵魂环阵","hp_below":0.5,"min_rotation":0,"attacks":[{"type":"radial_burst","warning":1.3,"interval":4.5,"speed":155,"count":8,"damage":11,"angle_offset":0.2},{"type":"summon","warning":1.3,"interval":5.0,"count":3,"enemy_id":"shaman"},{"type":"fan","warning":1.15,"interval":4.2,"speed":170,"count":7,"spread":2.4,"damage":12}]},
+        {"id":"soul_circle_return","name":"深层灵魂环阵","hp_below":0.5,"min_rotation":1,"attacks":[{"type":"radial_burst","warning":1.3,"interval":4.5,"speed":170,"count":10,"damage":11,"angle_offset":0.35},{"type":"summon","warning":1.3,"interval":5.0,"count":4,"enemy_id":"shaman"},{"type":"fan","warning":1.15,"interval":4.2,"speed":180,"count":9,"spread":2.6,"damage":12}]}
+      ]},
+    {"id":"boss_wyrm","name":"第三灾厄 · 烬焰领主","kind":"boss","behavior":"boss","sprite_tile":123,"hp":880,"speed":48,"damage":22,"radius":42,"xp":70,
+      "attacks":[{"type":"slam","warning":0.95,"interval":3.2,"radius":105,"damage":26},{"type":"fan","warning":0.95,"interval":3.7,"speed":205,"count":9,"spread":2.7,"damage":13}],
+      "phases":[
+        {"id":"ember_cluster","name":"三重烬焰","hp_below":0.5,"min_rotation":0,"attacks":[{"type":"slam","warning":1.3,"interval":4.2,"radius":55,"damage":20,"offsets":[[-95,0],[0,0],[95,0]]},{"type":"fan","warning":1.15,"interval":4.0,"speed":190,"count":9,"spread":2.7,"damage":13}]},
+        {"id":"ember_cluster_return","name":"深层烬焰","hp_below":0.5,"min_rotation":1,"attacks":[{"type":"slam","warning":1.4,"interval":4.6,"radius":52,"damage":20,"offsets":[[-100,0],[0,0],[100,0],[0,-100],[0,100]]},{"type":"fan","warning":1.2,"interval":4.2,"speed":195,"count":11,"spread":2.8,"damage":13}]}
+      ]}
+  ]
+}
