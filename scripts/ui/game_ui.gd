@@ -31,6 +31,7 @@ var boss_bar: ProgressBar
 var boss_label: Label
 var pacing_label: Label
 var joystick_view: Node2D
+var loot_sprites = preload("res://scripts/presentation/loot_sprites.gd").new()
 
 func _ready() -> void:
 	ui_theme = Theme.new()
@@ -216,7 +217,7 @@ func scroll_rows(rows: Array[String], height: float = 160.0) -> ScrollContainer:
 func show_camp(catalog: RefCounted, progress: Dictionary, selected: String, checkpoint: Dictionary = {}) -> void:
 	clear_panel("远征营地  ·  水晶 %d" % progress.crystals, true)
 	portrait.texture = load("res://assets/characters/%s.png" % selected)
-	paragraph("选择你的勇者。每局从1级出发，每5节点挑战一位灾厄领主，击败后继续远征。")
+	paragraph("选择你的勇者。每局从%d级出发，每%d节点挑战一位灾厄领主，击败后继续远征。" % [catalog.balance.player.starting_level, catalog.balance.difficulty.boss_every_nodes])
 	for id in catalog.character_order:
 		var entry: Dictionary = catalog.characters[id]
 		var unlocked: bool = progress.unlocks.has(id)
@@ -228,27 +229,75 @@ func show_camp(catalog: RefCounted, progress: Dictionary, selected: String, chec
 		var seconds = int(checkpoint.director.elapsed)
 		var saved_character = catalog.characters.get(checkpoint.combat.character_id, {}).get("name", checkpoint.combat.character_id)
 		menu_button("继续%s远征 · 等级%d · 节点%d · %02d:%02d" % [saved_character, checkpoint.session.level, checkpoint.director.node_index, seconds / 60, seconds % 60], "continue_saved")
-	menu_button("开始远征" if checkpoint.is_empty() else "放弃已保存远征，从1级重新出发", "start")
-	var cost = 10 + int(progress.vitality) * 5
-	menu_button("营地生命 +2%%  (%d/10)  ·  %d 水晶" % [progress.vitality, cost], "vitality", "", progress.vitality < 10 and progress.crystals >= cost)
+	menu_button("开始远征" if checkpoint.is_empty() else "放弃已保存远征，从%d级重新出发" % catalog.balance.player.starting_level, "start")
+	var rules: Dictionary = catalog.balance.meta
+	var cost = int(rules.vitality_price_base) + int(progress.vitality) * int(rules.vitality_price_per_rank)
+	menu_button("营地生命 +%.0f%%  (%d/%d)  ·  %d 水晶" % [float(rules.vitality_fraction_per_rank) * 100, progress.vitality, rules.max_vitality_rank, cost], "vitality", "", progress.vitality < int(rules.max_vitality_rank) and progress.crystals >= cost)
 	var actions = HBoxContainer.new()
 	actions.add_theme_constant_override("separation", 13)
 	content.add_child(actions)
-	for entry in [{"title": "远征记录", "action": "records"}, {"title": "设置与操作说明", "action": "settings"}]:
+	for entry in [{"title": "远征记录", "action": "records"}, {"title": "装备图鉴", "action": "equipment_collection"}, {"title": "设置与操作", "action": "settings"}]:
 		var button = make_menu_button(entry.title, entry.action)
-		button.custom_minimum_size.x = 370
+		button.custom_minimum_size.x = 235
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		actions.add_child(button)
 
 func show_upgrades(run: RefCounted) -> void:
-	clear_panel("升至 %d 级  ·  选择你的祝福" % run.level)
-	paragraph("战斗已暂停。祝福只在本局生效；不同铭文会改变你的战斗方式。")
+	clear_panel("升至 %d 级  ·  选择你的成长" % run.level)
+	paragraph("战斗已暂停。每%d级可强化或替换主动技能；技能替换保留当前冷却。" % int(run.catalog.balance.skill_progression.choice_every_levels))
 	var current = Readout.current(run)
 	paragraph("当前新攻击：单枚 %.1f  ·  暴击 %.0f%%  ·  弹体 %d 枚" % [current.damage, float(current.crit) * 100, run.combat.stats.projectile_count])
 	for entry in run.selected_upgrades:
 		var stacks = int(run.upgrades.stacks.get(entry.id, 0))
-		menu_button("%s   ·   %s   [已选%d次]" % [entry.title, entry.description, stacks], "upgrade", entry.id)
+		var skill_choice: bool = entry.get("kind", "") == "skill"
+		var button = make_menu_button("%s%s%s%s" % [entry.title, "\n" if skill_choice else "   ·   ", entry.description, "" if skill_choice else "   [已选%d次]" % stacks], "upgrade", entry.id)
+		if skill_choice:
+			button.custom_minimum_size.y = 72
+			button.add_theme_font_size_override("font_size", 18)
+		content.add_child(button)
 	menu_button("查看属性与已获祝福", "build", "upgrades_menu")
+
+func equipment_card(run: RefCounted, item: Dictionary, heading: String) -> void:
+	var row = HBoxContainer.new()
+	row.add_theme_constant_override("separation", 18)
+	content.add_child(row)
+	if not item.is_empty():
+		var icon = TextureRect.new()
+		icon.texture = loot_sprites.texture(int(run.combat.equipment.definitions[item.id].icon))
+		icon.custom_minimum_size = Vector2(66, 66)
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		row.add_child(icon)
+	var label = Label.new()
+	label.text = "%s：%s\n%s" % [heading, run.combat.equipment.item_name(item), run.combat.equipment.stat_text(item)]
+	label.add_theme_font_size_override("font_size", 19)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	if not item.is_empty(): label.modulate = Color(run.combat.equipment.rarities[int(item.rarity)].color)
+	row.add_child(label)
+
+func show_equipment(run: RefCounted) -> void:
+	var item: Dictionary = run.pending_equipment
+	clear_panel("发现%s · 选择是否装备" % run.combat.equipment.slots[item.slot])
+	panel.position.y = 110
+	panel.custom_minimum_size.y = 480
+	paragraph("战斗已暂停。装备提供基础属性，同部位替换；换装不会恢复生命。")
+	equipment_card(run, item, "新装备")
+	equipment_card(run, run.combat.equipment.equipped.get(item.slot, {}), "当前装备")
+	menu_button("装备并继续", "equip")
+	menu_button("保留当前装备，放弃掉落", "discard_equipment")
+	menu_button("查看完整属性与构筑", "build", "equipment_menu")
+
+func show_equipment_collection(run: RefCounted, progress: Dictionary) -> void:
+	clear_panel("装备图鉴 · 累计击败%d位Boss" % progress.total_bosses)
+	panel.position.y = 72
+	panel.custom_minimum_size.y = 570
+	paragraph("每局拾取装备，死亡后清空。累计击败Boss解锁新的掉落类型；普通、精良和史诗品质只影响本局的基础属性。")
+	var rows: Array[String] = []
+	for entry in run.combat.equipment.definitions.values():
+		rows.append("%s · %s · %s" % [entry.name, run.combat.equipment.slots[entry.slot], "已解锁" if progress.equipment_unlocks.has(entry.id) else "累计击败%d位Boss解锁" % entry.unlock_bosses])
+	scroll_rows(rows, 320)
+	menu_button("返回营地", "camp")
 
 func show_paused() -> void:
 	clear_panel("远征暂停")
@@ -269,6 +318,7 @@ func show_checkpoint_error() -> void:
 func show_result(result: Dictionary) -> void:
 	clear_panel("远征结束  ·  勇者的旅程仍将继续")
 	paragraph("存活 %02d:%02d  ·  节点 %d  ·  等级 %d\n击杀 %d  ·  击败Boss %d  ·  获得水晶 %d\n最后受到的伤害：%s" % [int(result.seconds) / 60, int(result.seconds) % 60, result.node, result.level, result.kills, result.bosses, result.crystals, result.death_source])
+	if result.has("equipment_unlocked"): paragraph("新装备类型已加入后续远征：" + "、".join(result.equipment_unlocked))
 	menu_button("再次远征", "start")
 	menu_button("返回营地", "camp")
 
@@ -278,21 +328,25 @@ func show_build(run: RefCounted, return_action: String) -> void:
 	panel.custom_minimum_size.y = 570
 	paragraph(Readout.stat_text(run))
 	paragraph(Readout.field_text(run))
-	scroll_rows(Readout.blessings(run.upgrades, run.upgrades.stacks))
-	menu_button("返回升级选择" if return_action == "upgrades_menu" else "返回暂停菜单", return_action)
+	var rows = Readout.loadout_rows(run)
+	rows.append_array(Readout.blessings(run.upgrades, run.upgrades.stacks))
+	scroll_rows(rows)
+	menu_button("返回装备比较" if return_action == "equipment_menu" else ("返回升级选择" if return_action == "upgrades_menu" else "返回暂停菜单"), return_action)
 
 func show_records(run: RefCounted, progress: Dictionary) -> void:
 	clear_panel("远征记录  ·  已完成%d局" % progress.total_runs)
 	panel.position.y = 72
 	panel.custom_minimum_size.y = 570
-	paragraph("最久存活 %s  ·  营地生命成长 %d/10" % [Readout.clock(progress.best_seconds), progress.vitality])
+	paragraph("最久存活 %s  ·  营地生命成长 %d/%d" % [Readout.clock(progress.best_seconds), progress.vitality, int(run.catalog.balance.meta.max_vitality_rank)])
 	var result: Dictionary = progress.last_run
 	if result.is_empty():
 		paragraph("每次远征结束后，会在这里保留上一局的成绩和祝福。你可以回看成长选择，再尝试不同搭配。")
 	else:
 		var character = run.catalog.characters.get(result.get("character", "knight"), {}).get("name", "勇者")
 		paragraph("上一局 · %s\n存活 %s  ·  等级%d  ·  节点%d\n击杀%d  ·  击败Boss%d  ·  水晶%d\n最后受到的伤害：%s" % [character, Readout.clock(result.seconds), result.level, result.node, result.kills, result.bosses, result.crystals, result.get("death_source", "")])
-		scroll_rows(Readout.blessings(run.upgrades, result.get("build", {})))
+		var rows = Readout.loadout_rows(run, result.get("equipment", {}), result.get("skill", run.catalog.characters.get(result.get("character", "knight"), {}).get("skill", "nova")), result.get("skill_ranks", {}))
+		rows.append_array(Readout.blessings(run.upgrades, result.get("build", {})))
+		scroll_rows(rows)
 	menu_button("返回营地", "camp")
 
 func show_settings(settings: Dictionary, return_action: String) -> void:
@@ -325,7 +379,7 @@ func hide_panel() -> void:
 	title.hide()
 
 func sync(run: RefCounted, delta: float, held_attack: bool = false) -> void:
-	var active = run.state in ["playing", "paused", "upgrade"]
+	var active = run.state in ["playing", "paused", "upgrade", "equipment"]
 	for control in [attack_button, skill_button, dash_button, pause_button, hud, hp_bar, xp_bar, node_bar, status, field_status, boss_bar, boss_label, pacing_label]:
 		control.visible = active
 	joystick_view.active = active
@@ -348,24 +402,24 @@ func sync(run: RefCounted, delta: float, held_attack: bool = false) -> void:
 	boss_label.visible = active and not boss.is_empty()
 	boss_bar.visible = boss_label.visible
 	pacing_label.visible = active and boss.is_empty()
-	pacing_label.text = "节点进度 · " + run.director.pacing_name()
+	pacing_label.text = "怪物Lv%d · %s" % [run.director.enemy_level(), run.director.pacing_name()]
 	if not boss.is_empty():
 		boss_bar.value = clampf(float(boss.hp) / float(boss.max_hp), 0, 1) * 100
-		boss_label.text = "%s  ·  %d/%d  ·  %.0f%%" % [run.catalog.enemies[boss.id].name, boss.hp, boss.max_hp, boss_bar.value]
+		boss_label.text = "%s Lv%d  ·  %d/%d  ·  %.0f%%" % [run.catalog.enemies[boss.id].name, int(boss.get("level", run.director.enemy_level())), boss.hp, boss.max_hp, boss_bar.value]
 		var view = preload("res://scripts/core/world_geometry.gd").visible_rect(run.combat.player)
 		if not view.has_point(boss.pos):
 			var direction: Vector2 = run.combat.player.direction_to(boss.pos)
 			boss_label.text += " · " + ("东" if direction.x > 0.35 else ("西" if direction.x < -0.35 else "")) + ("南" if direction.y > 0.35 else ("北" if direction.y < -0.35 else "")) + "方"
-	skill_button.text = "技能 %.1fs" % run.combat.skill_cooldown if run.combat.skill_cooldown > 0 else shortcut(run.catalog.characters[run.combat.character_id].skill_name, "K")
+	skill_button.text = "技能 %.1fs" % run.combat.skill_cooldown if run.combat.skill_cooldown > 0 else shortcut("%s %d级" % [run.combat.skills.definitions[run.combat.skills.active_id].name, run.combat.skills.rank()], "K")
 	dash_button.text = "闪避 %.1fs" % run.combat.dash_cooldown if run.combat.dash_cooldown > 0 else shortcut("闪避", "空格")
-	skill_button.cooldown_fraction = clampf(float(run.combat.skill_cooldown) / float(stats.skill_cooldown), 0, 1)
+	skill_button.cooldown_fraction = clampf(float(run.combat.skill_cooldown) / run.combat.skills.cooldown(stats), 0, 1)
 	dash_button.cooldown_fraction = clampf(float(run.combat.dash_cooldown) / float(run.catalog.balance.abilities.dash_cooldown_seconds), 0, 1)
 	for button in [attack_button, skill_button, dash_button]: button.queue_redraw()
 	status.text = "%s\n经验 %d/%d   ·   已获祝福 %d 种" % [run.catalog.characters[run.combat.character_id].name, run.xp, run.xp_required(), run.upgrades.stacks.size()]
 	field_status.text = run.combat.field.ui_description(run.combat.player)
 	field_status.modulate = Color("abc0c9")
 	if not run.combat.field.modifiers_at(run.combat.player).affliction.is_empty():
-		field_status.modulate = Color("e8dca1") if run.combat.field.definition.kind == "buff" else Color("f3c8a4")
+		field_status.modulate = Color("e8dca1") if run.combat.field.modifiers_at(run.combat.player).kind == "buff" else Color("f3c8a4")
 	banner_left = maxf(0, banner_left - delta)
 	banner.visible = banner_left > 0 and run.state == "playing" and not panel.visible
 

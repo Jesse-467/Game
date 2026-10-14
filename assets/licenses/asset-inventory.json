@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "recorded_date": "2026-10-13",
+  "recorded_date": "2026-10-14",
   "generation_prompt_record": "generated-art.json preserves available original prompts; some sheets were subsequently revised for frame padding",
   "assets": [
     {
@@ -218,6 +218,14 @@
       "bytes": 2926952,
       "sha256": "c416f4542e48e98421a333763a2bd86493e828fa7e046777941ce6748ef69ebd",
       "role": "eight terrain states; shared1024px atlas"
+    },
+    {
+      "path": "assets/items/loot-atlas.png",
+      "category": "items",
+      "source": "Project imagegen session, 2026-10-14; prompt: assets/licenses/loot-art-0.7.json",
+      "bytes": 1318591,
+      "sha256": "cf0550b11a7f8bce6175b7e1ed1ffc50891ffb849ae73981b606097b427ebd2f",
+      "role": "shared 4x2 equipment and healing atlas; runtime 1024x512"
     }
   ]
 }

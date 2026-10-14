@@ -1,8 +1,53 @@
 {
   "schema_version": 1,
   "characters": [
-    {"id": "knight", "name": "圣光骑士", "description": "圣光剑气 · 爆发清场", "sprite_tile": 96, "color": "f1cc78", "damage_multiplier": 1.0, "hp_multiplier": 1.0, "interval_multiplier": 1.0, "skill": "nova", "skill_name": "圣光爆发", "unlock_cost": 0, "starting_stats": {}},
-    {"id": "mage", "name": "冰霜法师", "description": "冰弹减速 · 冰封领域", "sprite_tile": 84, "color": "8bd4f2", "damage_multiplier": 0.85, "hp_multiplier": 0.85, "interval_multiplier": 0.9, "skill": "frost", "skill_name": "冰封领域", "unlock_cost": 25, "starting_stats": {"slow_fraction": 0.25, "slow_duration": 1.2}},
-    {"id": "ranger", "name": "逐风游侠", "description": "贯穿箭矢 · 箭雨齐射", "sprite_tile": 88, "color": "a7d898", "damage_multiplier": 0.85, "hp_multiplier": 0.9, "interval_multiplier": 0.82, "skill": "volley", "skill_name": "箭雨齐射", "unlock_cost": 40, "starting_stats": {"pierce": 1, "crit_chance": 0.1}}
+    {
+      "id": "knight",
+      "name": "圣光骑士",
+      "description": "圣光剑气 · 爆发清场",
+      "sprite_tile": 96,
+      "color": "f1cc78",
+      "damage_multiplier": 1,
+      "hp_multiplier": 1,
+      "interval_multiplier": 1,
+      "skill": "nova",
+      "skill_name": "圣光爆发",
+      "unlock_cost": 0,
+      "starting_stats": {}
+    },
+    {
+      "id": "mage",
+      "name": "冰霜法师",
+      "description": "冰弹减速 · 冰封领域",
+      "sprite_tile": 84,
+      "color": "8bd4f2",
+      "damage_multiplier": 0.85,
+      "hp_multiplier": 0.85,
+      "interval_multiplier": 0.9,
+      "skill": "frost",
+      "skill_name": "冰封领域",
+      "unlock_cost": 25,
+      "starting_stats": {
+        "slow_fraction": 0.25,
+        "slow_duration": 1.2
+      }
+    },
+    {
+      "id": "ranger",
+      "name": "逐风游侠",
+      "description": "贯穿箭矢 · 箭雨齐射",
+      "sprite_tile": 88,
+      "color": "a7d898",
+      "damage_multiplier": 0.85,
+      "hp_multiplier": 0.9,
+      "interval_multiplier": 0.82,
+      "skill": "volley",
+      "skill_name": "箭雨齐射",
+      "unlock_cost": 40,
+      "starting_stats": {
+        "pierce": 1,
+        "crit_chance": 0.1
+      }
+    }
   ]
 }

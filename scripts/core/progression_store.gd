@@ -3,10 +3,12 @@ extends RefCounted
 
 const SAVE_VERSION = 1
 const DEFAULT_PATH = "user://progress.json"
+const Equipment = preload("res://scripts/core/equipment_inventory.gd")
+const Config = preload("res://scripts/core/gameplay_config.gd")
 var path = DEFAULT_PATH
 
 func defaults() -> Dictionary:
-	return {"schema_version": SAVE_VERSION, "crystals": 0, "vitality": 0, "best_seconds": 0.0, "unlocks": ["knight"], "total_runs": 0, "last_run": {}, "last_settled_run_id": "", "settings": {"volume": 0.7, "control_scale": 1.0}}
+	return {"schema_version": SAVE_VERSION, "crystals": 0, "vitality": 0, "best_seconds": 0.0, "unlocks": ["knight"], "total_runs": 0, "total_bosses":0, "equipment_unlocks":Equipment.new().unlocked_for_bosses(0), "last_run": {}, "last_settled_run_id": "", "settings": {"volume": 0.7, "control_scale": 1.0}}
 
 func load_progress() -> Dictionary:
 	for candidate in [path, path + ".bak"]:
@@ -16,10 +18,12 @@ func load_progress() -> Dictionary:
 		if document is Dictionary and int(document.get("schema_version", 1)) == SAVE_VERSION:
 			var result = defaults()
 			result.crystals = maxi(0, int(document.get("crystals", 0)))
-			result.vitality = clampi(int(document.get("vitality", 0)), 0, 10)
+			result.vitality = clampi(int(document.get("vitality", 0)), 0, int(Config.section("meta").max_vitality_rank))
 			result.best_seconds = maxf(0, float(document.get("best_seconds", 0)))
 			result.unlocks = document.get("unlocks", ["knight"])
 			result.total_runs = maxi(0, int(document.get("total_runs", 0)))
+			result.total_bosses = maxi(0, int(document.get("total_bosses", document.get("last_run", {}).get("bosses", 0))))
+			result.equipment_unlocks = Equipment.new().unlocked_for_bosses(result.total_bosses)
 			result.last_run = document.get("last_run", {})
 			result.last_settled_run_id = str(document.get("last_settled_run_id", ""))
 			var settings: Dictionary = document.get("settings", {})

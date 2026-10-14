@@ -1,0 +1,4839 @@
+{
+  "version": 1,
+  "header_row": 3,
+  "books": [
+    "角色与成长.xlsx",
+    "怪物与关卡.xlsx",
+    "主动技能.xlsx",
+    "装备与掉落.xlsx",
+    "场地效果.xlsx",
+    "战斗与地图.xlsx"
+  ],
+  "tables": {
+    "Characters": {
+      "book": "角色与成长.xlsx",
+      "sheet": "勇者",
+      "fields": [
+        {
+          "key": "id",
+          "label": "编号",
+          "mode": "number_id",
+          "group": "Characters"
+        },
+        {
+          "key": "name",
+          "label": "勇者名称",
+          "mode": ""
+        },
+        {
+          "key": "description",
+          "label": "定位说明",
+          "mode": ""
+        },
+        {
+          "key": "damage_multiplier",
+          "label": "基础攻击倍率（倍）",
+          "mode": ""
+        },
+        {
+          "key": "hp_multiplier",
+          "label": "基础生命倍率（倍）",
+          "mode": ""
+        },
+        {
+          "key": "interval_multiplier",
+          "label": "基础攻击间隔倍率（倍）",
+          "mode": ""
+        },
+        {
+          "key": "skill",
+          "label": "初始主动技能",
+          "mode": "enum:Skills"
+        },
+        {
+          "key": "skill_name",
+          "label": "初始技能名称",
+          "mode": ""
+        },
+        {
+          "key": "unlock_cost",
+          "label": "解锁消耗（水晶）",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {
+          "sprite_tile": 96,
+          "color": "f1cc78"
+        },
+        {
+          "sprite_tile": 84,
+          "color": "8bd4f2"
+        },
+        {
+          "sprite_tile": 88,
+          "color": "a7d898"
+        }
+      ],
+      "default_keys": [
+        [
+          "knight"
+        ],
+        [
+          "mage"
+        ],
+        [
+          "ranger"
+        ]
+      ],
+      "key_fields": [
+        "id"
+      ]
+    },
+    "CharacterStats": {
+      "book": "角色与成长.xlsx",
+      "sheet": "职业基础属性",
+      "fields": [
+        {
+          "key": "character_id",
+          "label": "所属勇者",
+          "mode": "enum:Characters"
+        },
+        {
+          "key": "stat",
+          "label": "基础属性",
+          "mode": "enum:stat"
+        },
+        {
+          "key": "value",
+          "label": "额外基础数值",
+          "mode": "stat_value"
+        }
+      ],
+      "defaults": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "default_keys": [
+        [],
+        [],
+        [],
+        []
+      ],
+      "key_fields": []
+    },
+    "Upgrades": {
+      "book": "角色与成长.xlsx",
+      "sheet": "祝福",
+      "fields": [
+        {
+          "key": "id",
+          "label": "编号",
+          "mode": "number_id",
+          "group": "Upgrades"
+        },
+        {
+          "key": "title",
+          "label": "祝福名称",
+          "mode": ""
+        },
+        {
+          "key": "description",
+          "label": "效果说明",
+          "mode": ""
+        },
+        {
+          "key": "effect",
+          "label": "成长方式",
+          "mode": "enum:effect"
+        },
+        {
+          "key": "stat",
+          "label": "作用属性",
+          "mode": "enum:stat"
+        },
+        {
+          "key": "value",
+          "label": "每层效果数值",
+          "mode": "blessing_value"
+        },
+        {
+          "key": "max_stacks",
+          "label": "叠加上限（次）",
+          "mode": "unlimited"
+        },
+        {
+          "key": "tags",
+          "label": "功能类别",
+          "mode": "enum:tags"
+        },
+        {
+          "key": "floor",
+          "label": "最低间隔或冷却（秒）",
+          "mode": ""
+        },
+        {
+          "key": "damage_add",
+          "label": "额外基础攻击",
+          "mode": ""
+        },
+        {
+          "key": "cap",
+          "label": "属性上限",
+          "mode": ""
+        },
+        {
+          "key": "damage_penalty",
+          "label": "增加弹体时伤害减幅（%）",
+          "mode": ""
+        },
+        {
+          "key": "duration",
+          "label": "减速持续时间（秒）",
+          "mode": ""
+        },
+        {
+          "key": "min_level",
+          "label": "最早出现等级",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "default_keys": [
+        [
+          "power"
+        ],
+        [
+          "haste"
+        ],
+        [
+          "vitality"
+        ],
+        [
+          "heal"
+        ],
+        [
+          "speed"
+        ],
+        [
+          "multishot"
+        ],
+        [
+          "pierce"
+        ],
+        [
+          "frost"
+        ],
+        [
+          "blast"
+        ],
+        [
+          "crit"
+        ],
+        [
+          "execution"
+        ],
+        [
+          "magnet"
+        ],
+        [
+          "cooldown"
+        ],
+        [
+          "ember"
+        ],
+        [
+          "endurance"
+        ]
+      ],
+      "key_fields": [
+        "id"
+      ]
+    },
+    "Enemies": {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "怪物",
+      "fields": [
+        {
+          "key": "id",
+          "label": "编号",
+          "mode": "number_id",
+          "group": "Enemies"
+        },
+        {
+          "key": "name",
+          "label": "怪物名称",
+          "mode": ""
+        },
+        {
+          "key": "kind",
+          "label": "怪物类别",
+          "mode": "enum:kind"
+        },
+        {
+          "key": "behavior",
+          "label": "行动方式",
+          "mode": "enum:behavior"
+        },
+        {
+          "key": "hp",
+          "label": "基础生命",
+          "mode": ""
+        },
+        {
+          "key": "speed",
+          "label": "基础移速（像素/秒）",
+          "mode": ""
+        },
+        {
+          "key": "damage",
+          "label": "基础接触伤害",
+          "mode": ""
+        },
+        {
+          "key": "radius",
+          "label": "碰撞半径（像素）",
+          "mode": ""
+        },
+        {
+          "key": "xp",
+          "label": "击败经验",
+          "mode": ""
+        },
+        {
+          "key": "weight",
+          "label": "普通怪出现权重",
+          "mode": ""
+        },
+        {
+          "key": "min_node",
+          "label": "最早出现节点",
+          "mode": ""
+        },
+        {
+          "key": "defense",
+          "label": "基础防御",
+          "mode": ""
+        },
+        {
+          "key": "crit_resistance",
+          "label": "基础暴击抵抗（%）",
+          "mode": ""
+        },
+        {
+          "key": "slow_resistance",
+          "label": "基础减速抵抗（%）",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {
+          "sprite_tile": 108
+        },
+        {
+          "sprite_tile": 120
+        },
+        {
+          "sprite_tile": 122
+        },
+        {
+          "sprite_tile": 121
+        },
+        {
+          "sprite_tile": 110
+        },
+        {
+          "sprite_tile": 124
+        },
+        {
+          "sprite_tile": 110
+        },
+        {
+          "sprite_tile": 124
+        },
+        {
+          "sprite_tile": 123
+        }
+      ],
+      "default_keys": [
+        [
+          "slime"
+        ],
+        [
+          "bat"
+        ],
+        [
+          "skeleton"
+        ],
+        [
+          "shaman"
+        ],
+        [
+          "charger"
+        ],
+        [
+          "elite_guard"
+        ],
+        [
+          "boss_ogre"
+        ],
+        [
+          "boss_lich"
+        ],
+        [
+          "boss_wyrm"
+        ]
+      ],
+      "key_fields": [
+        "id"
+      ]
+    },
+    "BossPhases": {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "首领阶段",
+      "fields": [
+        {
+          "key": "enemy_id",
+          "label": "所属首领",
+          "mode": "enum:Enemies"
+        },
+        {
+          "key": "phase_id",
+          "label": "阶段名称",
+          "mode": "enum:phase"
+        },
+        {
+          "key": "order",
+          "label": "阶段顺序",
+          "mode": "plus_one"
+        },
+        {
+          "key": "name",
+          "label": "阶段显示名称",
+          "mode": ""
+        },
+        {
+          "key": "hp_below",
+          "label": "血量低于此比例进入（%）",
+          "mode": ""
+        },
+        {
+          "key": "min_rotation",
+          "label": "最早启用轮次",
+          "mode": "plus_one"
+        }
+      ],
+      "defaults": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "default_keys": [
+        [
+          "boss_ogre",
+          "fracture"
+        ],
+        [
+          "boss_ogre",
+          "fracture_return"
+        ],
+        [
+          "boss_ogre",
+          "ogre_rage"
+        ],
+        [
+          "boss_lich",
+          "soul_circle"
+        ],
+        [
+          "boss_lich",
+          "soul_circle_return"
+        ],
+        [
+          "boss_lich",
+          "lich_rage"
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster"
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return"
+        ],
+        [
+          "boss_wyrm",
+          "wyrm_rage"
+        ]
+      ],
+      "key_fields": [
+        "enemy_id",
+        "phase_id"
+      ]
+    },
+    "EnemyActions": {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "敌方招式",
+      "fields": [
+        {
+          "key": "enemy_id",
+          "label": "所属怪物",
+          "mode": "enum:Enemies"
+        },
+        {
+          "key": "phase_id",
+          "label": "所属阶段",
+          "mode": "enum:phase"
+        },
+        {
+          "key": "attack_index",
+          "label": "招式序号",
+          "mode": "plus_one"
+        },
+        {
+          "key": "part_index",
+          "label": "组合内效果",
+          "mode": "part"
+        },
+        {
+          "key": "type",
+          "label": "招式方式",
+          "mode": "enum:action"
+        },
+        {
+          "key": "radius",
+          "label": "作用半径（像素）",
+          "mode": ""
+        },
+        {
+          "key": "damage",
+          "label": "基础技能伤害",
+          "mode": ""
+        },
+        {
+          "key": "range",
+          "label": "触发距离（像素）",
+          "mode": ""
+        },
+        {
+          "key": "warning",
+          "label": "出手预告（秒）",
+          "mode": ""
+        },
+        {
+          "key": "interval",
+          "label": "再次出手间隔（秒）",
+          "mode": ""
+        },
+        {
+          "key": "speed",
+          "label": "移动或弹体速度（像素/秒）",
+          "mode": ""
+        },
+        {
+          "key": "duration",
+          "label": "持续时间（秒）",
+          "mode": ""
+        },
+        {
+          "key": "count",
+          "label": "弹体或召唤数量（个）",
+          "mode": ""
+        },
+        {
+          "key": "spread",
+          "label": "扇形总角度（度）",
+          "mode": "degrees"
+        },
+        {
+          "key": "inner_radius",
+          "label": "环形安全内圈（像素）",
+          "mode": ""
+        },
+        {
+          "key": "tick",
+          "label": "持续伤害间隔（秒）",
+          "mode": ""
+        },
+        {
+          "key": "angle_offset",
+          "label": "环射起始角度（度）",
+          "mode": "degrees"
+        },
+        {
+          "key": "spawn_enemy_id",
+          "label": "召唤的怪物",
+          "mode": "enum:Enemies"
+        }
+      ],
+      "defaults": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "color": "e77f65"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "color": "e77f65"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "color": "e77f65"
+        },
+        {},
+        {},
+        {},
+        {},
+        {
+          "color": "e77f65"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "color": "e77f65"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "color": "e77f65"
+        },
+        {},
+        {},
+        {},
+        {},
+        {
+          "color": "e77f65"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "color": "e77f65"
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+          "color": "e77f65"
+        },
+        {},
+        {},
+        {
+          "color": "e77f65"
+        },
+        {},
+        {},
+        {}
+      ],
+      "default_keys": [
+        [
+          "slime",
+          "normal",
+          0,
+          -1
+        ],
+        [
+          "bat",
+          "normal",
+          0,
+          -1
+        ],
+        [
+          "skeleton",
+          "normal",
+          0,
+          -1
+        ],
+        [
+          "shaman",
+          "normal",
+          0,
+          -1
+        ],
+        [
+          "charger",
+          "normal",
+          0,
+          -1
+        ],
+        [
+          "elite_guard",
+          "normal",
+          0,
+          -1
+        ],
+        [
+          "elite_guard",
+          "normal",
+          0,
+          0
+        ],
+        [
+          "elite_guard",
+          "normal",
+          0,
+          1
+        ],
+        [
+          "boss_ogre",
+          "opening",
+          0,
+          -1
+        ],
+        [
+          "boss_ogre",
+          "opening",
+          1,
+          -1
+        ],
+        [
+          "boss_ogre",
+          "opening",
+          2,
+          -1
+        ],
+        [
+          "boss_ogre",
+          "opening",
+          2,
+          0
+        ],
+        [
+          "boss_ogre",
+          "opening",
+          2,
+          1
+        ],
+        [
+          "boss_ogre",
+          "fracture",
+          0,
+          -1
+        ],
+        [
+          "boss_ogre",
+          "fracture",
+          0,
+          0
+        ],
+        [
+          "boss_ogre",
+          "fracture",
+          0,
+          1
+        ],
+        [
+          "boss_ogre",
+          "fracture",
+          1,
+          -1
+        ],
+        [
+          "boss_ogre",
+          "fracture",
+          2,
+          -1
+        ],
+        [
+          "boss_ogre",
+          "fracture",
+          2,
+          0
+        ],
+        [
+          "boss_ogre",
+          "fracture",
+          2,
+          1
+        ],
+        [
+          "boss_ogre",
+          "fracture_return",
+          0,
+          -1
+        ],
+        [
+          "boss_ogre",
+          "fracture_return",
+          0,
+          0
+        ],
+        [
+          "boss_ogre",
+          "fracture_return",
+          0,
+          1
+        ],
+        [
+          "boss_ogre",
+          "fracture_return",
+          1,
+          -1
+        ],
+        [
+          "boss_ogre",
+          "fracture_return",
+          2,
+          -1
+        ],
+        [
+          "boss_ogre",
+          "fracture_return",
+          2,
+          0
+        ],
+        [
+          "boss_ogre",
+          "fracture_return",
+          2,
+          1
+        ],
+        [
+          "boss_ogre",
+          "ogre_rage",
+          0,
+          -1
+        ],
+        [
+          "boss_ogre",
+          "ogre_rage",
+          0,
+          0
+        ],
+        [
+          "boss_ogre",
+          "ogre_rage",
+          0,
+          1
+        ],
+        [
+          "boss_ogre",
+          "ogre_rage",
+          1,
+          -1
+        ],
+        [
+          "boss_lich",
+          "opening",
+          0,
+          -1
+        ],
+        [
+          "boss_lich",
+          "opening",
+          0,
+          0
+        ],
+        [
+          "boss_lich",
+          "opening",
+          0,
+          1
+        ],
+        [
+          "boss_lich",
+          "opening",
+          1,
+          -1
+        ],
+        [
+          "boss_lich",
+          "opening",
+          2,
+          -1
+        ],
+        [
+          "boss_lich",
+          "soul_circle",
+          0,
+          -1
+        ],
+        [
+          "boss_lich",
+          "soul_circle",
+          0,
+          0
+        ],
+        [
+          "boss_lich",
+          "soul_circle",
+          0,
+          1
+        ],
+        [
+          "boss_lich",
+          "soul_circle",
+          1,
+          -1
+        ],
+        [
+          "boss_lich",
+          "soul_circle",
+          2,
+          -1
+        ],
+        [
+          "boss_lich",
+          "soul_circle",
+          2,
+          0
+        ],
+        [
+          "boss_lich",
+          "soul_circle",
+          2,
+          1
+        ],
+        [
+          "boss_lich",
+          "soul_circle_return",
+          0,
+          -1
+        ],
+        [
+          "boss_lich",
+          "soul_circle_return",
+          0,
+          0
+        ],
+        [
+          "boss_lich",
+          "soul_circle_return",
+          0,
+          1
+        ],
+        [
+          "boss_lich",
+          "soul_circle_return",
+          1,
+          -1
+        ],
+        [
+          "boss_lich",
+          "soul_circle_return",
+          2,
+          -1
+        ],
+        [
+          "boss_lich",
+          "soul_circle_return",
+          2,
+          0
+        ],
+        [
+          "boss_lich",
+          "soul_circle_return",
+          2,
+          1
+        ],
+        [
+          "boss_lich",
+          "lich_rage",
+          0,
+          -1
+        ],
+        [
+          "boss_lich",
+          "lich_rage",
+          0,
+          0
+        ],
+        [
+          "boss_lich",
+          "lich_rage",
+          0,
+          1
+        ],
+        [
+          "boss_lich",
+          "lich_rage",
+          1,
+          -1
+        ],
+        [
+          "boss_lich",
+          "lich_rage",
+          1,
+          0
+        ],
+        [
+          "boss_lich",
+          "lich_rage",
+          1,
+          1
+        ],
+        [
+          "boss_wyrm",
+          "opening",
+          0,
+          -1
+        ],
+        [
+          "boss_wyrm",
+          "opening",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "opening",
+          0,
+          1
+        ],
+        [
+          "boss_wyrm",
+          "opening",
+          1,
+          -1
+        ],
+        [
+          "boss_wyrm",
+          "opening",
+          2,
+          -1
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster",
+          0,
+          -1
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster",
+          0,
+          1
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster",
+          1,
+          -1
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster",
+          1,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster",
+          1,
+          1
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          0,
+          -1
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          0,
+          1
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          1,
+          -1
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          1,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          1,
+          1
+        ],
+        [
+          "boss_wyrm",
+          "wyrm_rage",
+          0,
+          -1
+        ],
+        [
+          "boss_wyrm",
+          "wyrm_rage",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "wyrm_rage",
+          0,
+          1
+        ],
+        [
+          "boss_wyrm",
+          "wyrm_rage",
+          0,
+          2
+        ],
+        [
+          "boss_wyrm",
+          "wyrm_rage",
+          1,
+          -1
+        ]
+      ],
+      "key_fields": [
+        "enemy_id",
+        "phase_id",
+        "attack_index",
+        "part_index"
+      ]
+    },
+    "AttackOffsets": {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "技能落点",
+      "fields": [
+        {
+          "key": "enemy_id",
+          "label": "所属怪物",
+          "mode": "enum:Enemies"
+        },
+        {
+          "key": "phase_id",
+          "label": "所属阶段",
+          "mode": "enum:phase"
+        },
+        {
+          "key": "attack_index",
+          "label": "招式序号",
+          "mode": "plus_one"
+        },
+        {
+          "key": "part_index",
+          "label": "组合内效果",
+          "mode": "part"
+        },
+        {
+          "key": "offset_index",
+          "label": "落点序号",
+          "mode": "plus_one"
+        },
+        {
+          "key": "x",
+          "label": "向右偏移（像素）",
+          "mode": ""
+        },
+        {
+          "key": "y",
+          "label": "向下偏移（像素）",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "default_keys": [
+        [
+          "boss_ogre",
+          "fracture",
+          2,
+          0
+        ],
+        [
+          "boss_ogre",
+          "fracture",
+          2,
+          0
+        ],
+        [
+          "boss_ogre",
+          "fracture",
+          2,
+          0
+        ],
+        [
+          "boss_ogre",
+          "fracture_return",
+          2,
+          0
+        ],
+        [
+          "boss_ogre",
+          "fracture_return",
+          2,
+          0
+        ],
+        [
+          "boss_ogre",
+          "fracture_return",
+          2,
+          0
+        ],
+        [
+          "boss_ogre",
+          "ogre_rage",
+          0,
+          0
+        ],
+        [
+          "boss_ogre",
+          "ogre_rage",
+          0,
+          0
+        ],
+        [
+          "boss_ogre",
+          "ogre_rage",
+          0,
+          0
+        ],
+        [
+          "boss_ogre",
+          "ogre_rage",
+          0,
+          0
+        ],
+        [
+          "boss_ogre",
+          "ogre_rage",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "ember_cluster_return",
+          0,
+          0
+        ],
+        [
+          "boss_wyrm",
+          "wyrm_rage",
+          0,
+          1
+        ],
+        [
+          "boss_wyrm",
+          "wyrm_rage",
+          0,
+          1
+        ]
+      ],
+      "key_fields": [
+        "enemy_id",
+        "phase_id",
+        "attack_index",
+        "part_index"
+      ]
+    },
+    "NodeRoster": {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "出怪安排",
+      "fields": [
+        {
+          "key": "position",
+          "label": "循环内节点",
+          "mode": ""
+        },
+        {
+          "key": "name",
+          "label": "关卡名称",
+          "mode": ""
+        },
+        {
+          "key": "enemies",
+          "label": "普通怪物池",
+          "mode": "enum:Enemies"
+        },
+        {
+          "key": "elite_chance",
+          "label": "精英出现概率（%）",
+          "mode": ""
+        },
+        {
+          "key": "elite_id",
+          "label": "精英怪物",
+          "mode": "enum:Enemies"
+        },
+        {
+          "key": "modifiers",
+          "label": "本节点附加状态",
+          "mode": "enum:NodeStates"
+        },
+        {
+          "key": "elite_max_active",
+          "label": "同时存在精英上限（个）",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "default_keys": [
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "key_fields": []
+    },
+    "BossRotation": {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "首领顺序",
+      "fields": [
+        {
+          "key": "order",
+          "label": "登场顺序",
+          "mode": "plus_one"
+        },
+        {
+          "key": "enemy_id",
+          "label": "首领名称",
+          "mode": "enum:Enemies"
+        }
+      ],
+      "defaults": [
+        {},
+        {},
+        {}
+      ],
+      "default_keys": [
+        [
+          "boss_ogre"
+        ],
+        [
+          "boss_lich"
+        ],
+        [
+          "boss_wyrm"
+        ]
+      ],
+      "key_fields": [
+        "enemy_id"
+      ]
+    },
+    "NodeStates": {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "关卡状态",
+      "fields": [
+        {
+          "key": "id",
+          "label": "编号",
+          "mode": "number_id",
+          "group": "NodeStates"
+        },
+        {
+          "key": "name",
+          "label": "状态名称",
+          "mode": ""
+        },
+        {
+          "key": "targets",
+          "label": "影响怪物类别",
+          "mode": "enum:kind"
+        },
+        {
+          "key": "defense_add",
+          "label": "额外防御",
+          "mode": ""
+        },
+        {
+          "key": "hp_bonus",
+          "label": "额外生命增幅（%）",
+          "mode": ""
+        },
+        {
+          "key": "damage_bonus",
+          "label": "额外伤害增幅（%）",
+          "mode": ""
+        },
+        {
+          "key": "attack_speed_bonus",
+          "label": "额外出手速度增幅（%）",
+          "mode": ""
+        },
+        {
+          "key": "speed_bonus",
+          "label": "额外移速增幅（%）",
+          "mode": ""
+        },
+        {
+          "key": "crit_resistance_add",
+          "label": "额外暴击抵抗（%）",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "default_keys": [
+        [
+          "fortified"
+        ],
+        [
+          "frenzy"
+        ],
+        [
+          "swift"
+        ],
+        [
+          "malice"
+        ]
+      ],
+      "key_fields": [
+        "id"
+      ]
+    },
+    "Skills": {
+      "book": "主动技能.xlsx",
+      "sheet": "技能",
+      "fields": [
+        {
+          "key": "id",
+          "label": "编号",
+          "mode": "number_id",
+          "group": "Skills"
+        },
+        {
+          "key": "character",
+          "label": "适用勇者",
+          "mode": "enum:Characters"
+        },
+        {
+          "key": "name",
+          "label": "技能名称",
+          "mode": ""
+        },
+        {
+          "key": "description",
+          "label": "战斗用途",
+          "mode": ""
+        },
+        {
+          "key": "kind",
+          "label": "技能方式",
+          "mode": "enum:skill_kind"
+        },
+        {
+          "key": "cooldown",
+          "label": "基础冷却（秒）",
+          "mode": ""
+        },
+        {
+          "key": "damage",
+          "label": "一级伤害倍率（倍）",
+          "mode": ""
+        },
+        {
+          "key": "damage_per_rank",
+          "label": "每级增加伤害倍率",
+          "mode": ""
+        },
+        {
+          "key": "radius",
+          "label": "一级作用半径（像素）",
+          "mode": ""
+        },
+        {
+          "key": "radius_per_rank",
+          "label": "每级增加半径（像素）",
+          "mode": ""
+        },
+        {
+          "key": "count",
+          "label": "一级弹体数量（个）",
+          "mode": ""
+        },
+        {
+          "key": "count_per_rank",
+          "label": "每级增加弹体（个）",
+          "mode": ""
+        },
+        {
+          "key": "spread",
+          "label": "扇形总角度（度）",
+          "mode": "degrees"
+        },
+        {
+          "key": "pierce",
+          "label": "额外穿透次数",
+          "mode": ""
+        },
+        {
+          "key": "shield",
+          "label": "一级护盾值",
+          "mode": ""
+        },
+        {
+          "key": "shield_per_rank",
+          "label": "每级增加护盾",
+          "mode": ""
+        },
+        {
+          "key": "duration",
+          "label": "区域或护盾持续（秒）",
+          "mode": ""
+        },
+        {
+          "key": "slow",
+          "label": "减速力度（%）",
+          "mode": ""
+        },
+        {
+          "key": "slow_duration",
+          "label": "减速持续（秒）",
+          "mode": ""
+        },
+        {
+          "key": "tick",
+          "label": "持续伤害间隔（秒）",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {
+          "color": "f5ce73"
+        },
+        {
+          "color": "f3db87"
+        },
+        {
+          "color": "91daca"
+        },
+        {
+          "color": "87d8f3"
+        },
+        {
+          "color": "b7ecfa"
+        },
+        {
+          "color": "8cc7ed"
+        },
+        {
+          "color": "b4dfa0"
+        },
+        {
+          "color": "e6d790"
+        },
+        {
+          "color": "9bd098"
+        }
+      ],
+      "default_keys": [
+        [
+          "nova"
+        ],
+        [
+          "judgment"
+        ],
+        [
+          "aegis"
+        ],
+        [
+          "frost"
+        ],
+        [
+          "glacial_lance"
+        ],
+        [
+          "blizzard"
+        ],
+        [
+          "volley"
+        ],
+        [
+          "aimed_shot"
+        ],
+        [
+          "thorn_trap"
+        ]
+      ],
+      "key_fields": [
+        "id"
+      ]
+    },
+    "Equipment": {
+      "book": "装备与掉落.xlsx",
+      "sheet": "装备",
+      "fields": [
+        {
+          "key": "id",
+          "label": "编号",
+          "mode": "number_id",
+          "group": "Equipment"
+        },
+        {
+          "key": "name",
+          "label": "装备名称",
+          "mode": ""
+        },
+        {
+          "key": "slot",
+          "label": "装备部位",
+          "mode": "enum:EquipmentSlots"
+        },
+        {
+          "key": "character",
+          "label": "专用勇者",
+          "mode": "enum:Characters"
+        },
+        {
+          "key": "unlock_bosses",
+          "label": "累计击败首领后解锁（个）",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {
+          "icon": 0
+        },
+        {
+          "icon": 1
+        },
+        {
+          "icon": 2
+        },
+        {
+          "icon": 3
+        },
+        {
+          "icon": 4
+        },
+        {
+          "icon": 5
+        },
+        {
+          "icon": 0
+        },
+        {
+          "icon": 1
+        },
+        {
+          "icon": 2
+        },
+        {
+          "icon": 3
+        },
+        {
+          "icon": 7
+        },
+        {
+          "icon": 5
+        }
+      ],
+      "default_keys": [
+        [
+          "iron_sword"
+        ],
+        [
+          "oak_staff"
+        ],
+        [
+          "hunter_bow"
+        ],
+        [
+          "guard_mail"
+        ],
+        [
+          "keen_charm"
+        ],
+        [
+          "scout_boots"
+        ],
+        [
+          "swift_blade"
+        ],
+        [
+          "frost_staff"
+        ],
+        [
+          "swift_bow"
+        ],
+        [
+          "bulwark_mail"
+        ],
+        [
+          "scholar_charm"
+        ],
+        [
+          "ward_boots"
+        ]
+      ],
+      "key_fields": [
+        "id"
+      ]
+    },
+    "EquipmentStats": {
+      "book": "装备与掉落.xlsx",
+      "sheet": "装备属性",
+      "fields": [
+        {
+          "key": "equipment_id",
+          "label": "所属装备",
+          "mode": "enum:Equipment"
+        },
+        {
+          "key": "stat",
+          "label": "增加的基础属性",
+          "mode": "enum:stat"
+        },
+        {
+          "key": "value",
+          "label": "基础增量",
+          "mode": "stat_value"
+        }
+      ],
+      "defaults": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "default_keys": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "key_fields": []
+    },
+    "EquipmentSlots": {
+      "book": "装备与掉落.xlsx",
+      "sheet": "部位",
+      "fields": [
+        {
+          "key": "id",
+          "label": "编号",
+          "mode": "number_id",
+          "group": "EquipmentSlots"
+        },
+        {
+          "key": "name",
+          "label": "部位名称",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "default_keys": [
+        [
+          "weapon"
+        ],
+        [
+          "armor"
+        ],
+        [
+          "amulet"
+        ],
+        [
+          "boots"
+        ]
+      ],
+      "key_fields": [
+        "id"
+      ]
+    },
+    "Rarities": {
+      "book": "装备与掉落.xlsx",
+      "sheet": "品质",
+      "fields": [
+        {
+          "key": "id",
+          "label": "编号",
+          "mode": "number_id",
+          "group": "Rarities"
+        },
+        {
+          "key": "name",
+          "label": "品质名称",
+          "mode": ""
+        },
+        {
+          "key": "factor",
+          "label": "基础数值倍率（倍）",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {
+          "color": "bac6d0"
+        },
+        {
+          "color": "7ecac1"
+        },
+        {
+          "color": "cc9fe6"
+        }
+      ],
+      "default_keys": [
+        [
+          "common"
+        ],
+        [
+          "rare"
+        ],
+        [
+          "epic"
+        ]
+      ],
+      "key_fields": [
+        "id"
+      ]
+    },
+    "Terrain": {
+      "book": "场地效果.xlsx",
+      "sheet": "区域效果",
+      "fields": [
+        {
+          "key": "rotation_order",
+          "label": "轮换顺序",
+          "mode": "plus_one"
+        },
+        {
+          "key": "id",
+          "label": "编号",
+          "mode": "number_id",
+          "group": "Terrain"
+        },
+        {
+          "key": "name",
+          "label": "区域名称",
+          "mode": ""
+        },
+        {
+          "key": "kind",
+          "label": "效果性质",
+          "mode": "enum:terrain_kind"
+        },
+        {
+          "key": "summary",
+          "label": "效果说明",
+          "mode": ""
+        },
+        {
+          "key": "move_multiplier",
+          "label": "移动速度倍率（倍）",
+          "mode": ""
+        },
+        {
+          "key": "crit_chance_delta",
+          "label": "暴击概率增减（%）",
+          "mode": ""
+        },
+        {
+          "key": "outgoing_damage_multiplier",
+          "label": "输出伤害倍率（倍）",
+          "mode": ""
+        },
+        {
+          "key": "control_duration_multiplier",
+          "label": "控制时长倍率（倍）",
+          "mode": ""
+        },
+        {
+          "key": "tick_damage",
+          "label": "每次环境伤害",
+          "mode": ""
+        },
+        {
+          "key": "tick_interval_seconds",
+          "label": "环境伤害间隔（秒）",
+          "mode": ""
+        },
+        {
+          "key": "attack_interval_multiplier",
+          "label": "攻击间隔倍率（倍）",
+          "mode": ""
+        },
+        {
+          "key": "incoming_damage_multiplier",
+          "label": "受到伤害倍率（倍）",
+          "mode": ""
+        }
+      ],
+      "defaults": [
+        {
+          "color": "82d7ef",
+          "atlas_index": 0
+        },
+        {
+          "color": "ecd18b",
+          "atlas_index": 1
+        },
+        {
+          "color": "c292e6",
+          "atlas_index": 2
+        },
+        {
+          "color": "a6dab8",
+          "atlas_index": 3
+        },
+        {
+          "color": "f3a074",
+          "atlas_index": 4
+        },
+        {
+          "color": "959dce",
+          "atlas_index": 5
+        },
+        {
+          "color": "f7a257",
+          "atlas_index": 6
+        },
+        {
+          "color": "80d7d2",
+          "atlas_index": 7
+        }
+      ],
+      "default_keys": [
+        [
+          "frost_ground"
+        ],
+        [
+          "keen_ground"
+        ],
+        [
+          "void_ground"
+        ],
+        [
+          "control_ground"
+        ],
+        [
+          "ember_ground"
+        ],
+        [
+          "blind_ground"
+        ],
+        [
+          "fury_ground"
+        ],
+        [
+          "ward_ground"
+        ]
+      ],
+      "key_fields": [
+        "id"
+      ]
+    }
+  },
+  "parameters": [
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "初始等级",
+      "source": {
+        "section": "balance",
+        "key": "balance.player.starting_level",
+        "type": "int",
+        "value": 1,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础生命",
+      "source": {
+        "section": "balance",
+        "key": "balance.player.max_hp",
+        "type": "int",
+        "value": 100,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础移速",
+      "source": {
+        "section": "balance",
+        "key": "balance.player.move_speed",
+        "type": "int",
+        "value": 230,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础普攻伤害",
+      "source": {
+        "section": "balance",
+        "key": "balance.player.attack_damage",
+        "type": "int",
+        "value": 12,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础攻击间隔",
+      "source": {
+        "section": "balance",
+        "key": "balance.player.attack_interval_seconds",
+        "type": "number",
+        "value": 0.65,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "受伤保护时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.player.hurt_invulnerability_seconds",
+        "type": "number",
+        "value": 0.65,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "经验牵引范围",
+      "source": {
+        "section": "balance",
+        "key": "balance.player.pickup_radius",
+        "type": "int",
+        "value": 70,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "升级经验",
+      "name": "一级所需经验",
+      "source": {
+        "section": "balance",
+        "key": "balance.experience.base",
+        "type": "int",
+        "value": 8,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "升级经验",
+      "name": "每级经验增加",
+      "source": {
+        "section": "balance",
+        "key": "balance.experience.linear_per_level",
+        "type": "int",
+        "value": 4,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "升级经验",
+      "name": "经验曲线强度",
+      "source": {
+        "section": "balance",
+        "key": "balance.experience.power_coefficient",
+        "type": "number",
+        "value": 1.2,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "升级经验",
+      "name": "经验曲线弯曲程度",
+      "source": {
+        "section": "balance",
+        "key": "balance.experience.power_exponent",
+        "type": "number",
+        "value": 1.25,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "每分钟普通怪基础生命增幅",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.hp_growth_per_minute",
+        "type": "number",
+        "value": 0.18,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "每分钟怪物基础伤害增幅",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.damage_growth_per_minute",
+        "type": "number",
+        "value": 0.075,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "基础移速成长倍率上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.speed_multiplier_cap",
+        "type": "number",
+        "value": 1.45,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "普通节点持续时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.node_duration_seconds",
+        "type": "int",
+        "value": 40,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "每几个节点出现首领",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.boss_every_nodes",
+        "type": "int",
+        "value": 5,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "过关恢复最大生命比例",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.node_heal_fraction",
+        "type": "number",
+        "value": 0.03,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "同时存在怪物上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.max_active_enemies",
+        "type": "int",
+        "value": 120,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "初始刷怪间隔",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.spawn_interval_start_seconds",
+        "type": "number",
+        "value": 1.2,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "最快刷怪间隔",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.spawn_interval_floor_seconds",
+        "type": "number",
+        "value": 0.4,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "每分钟刷怪加速",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.spawn_growth_per_minute",
+        "type": "number",
+        "value": 0.1,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "刷怪最小距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.spawn_distance_min",
+        "type": "int",
+        "value": 240,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "刷怪最大距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.spawn_distance_max",
+        "type": "int",
+        "value": 470,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "每完整首领轮回基础生命增幅",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.boss_hp_growth_per_rotation",
+        "type": "number",
+        "value": 1.15,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "每次首领登场基础生命增幅",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.boss_hp_growth_per_encounter",
+        "type": "number",
+        "value": 0.4,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "节点开场缓冲时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.pacing_recovery_seconds",
+        "type": "int",
+        "value": 8,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "怪物潮开始时刻",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.pacing_peak_start_seconds",
+        "type": "int",
+        "value": 25,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "怪物潮结束时刻",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.pacing_peak_end_seconds",
+        "type": "int",
+        "value": 34,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "缓冲期刷怪间隔倍率",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.pacing_recovery_multiplier",
+        "type": "number",
+        "value": 1.65,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "怪物潮刷怪间隔倍率",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.pacing_peak_multiplier",
+        "type": "number",
+        "value": 0.72,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "首领战小怪间隔倍率",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.boss_mob_interval_multiplier",
+        "type": "number",
+        "value": 1.8,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "渐强开始刷怪间隔倍率",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.spawn_ramp_start_multiplier",
+        "type": "number",
+        "value": 1.15,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "渐强结束刷怪间隔倍率",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.spawn_ramp_end_multiplier",
+        "type": "number",
+        "value": 0.85,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "开局首次出怪延迟",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.initial_spawn_delay",
+        "type": "number",
+        "value": 0.7,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "难度节奏",
+      "name": "换节点首次出怪延迟",
+      "source": {
+        "section": "balance",
+        "key": "balance.difficulty.node_spawn_delay",
+        "type": "number",
+        "value": 1.4,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "闪避与冷却",
+      "name": "闪避冷却",
+      "source": {
+        "section": "balance",
+        "key": "balance.abilities.dash_cooldown_seconds",
+        "type": "int",
+        "value": 3,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "闪避与冷却",
+      "name": "闪避持续时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.abilities.dash_duration_seconds",
+        "type": "number",
+        "value": 0.2,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "闪避与冷却",
+      "name": "闪避移速",
+      "source": {
+        "section": "balance",
+        "key": "balance.abilities.dash_speed",
+        "type": "int",
+        "value": 750,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "闪避与冷却",
+      "name": "闪避受伤保护时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.abilities.dash_immunity_seconds",
+        "type": "number",
+        "value": 0.3,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "闪避与冷却",
+      "name": "角色技能冷却基准",
+      "source": {
+        "section": "balance",
+        "key": "balance.abilities.skill_cooldown_seconds",
+        "type": "int",
+        "value": 9,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "闪避与冷却",
+      "name": "技能最低冷却",
+      "source": {
+        "section": "balance",
+        "key": "balance.abilities.skill_cooldown_floor",
+        "type": "int",
+        "value": 3,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "普通怪药剂掉落概率",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.health_chance",
+        "type": "number",
+        "value": 0.035,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "精英药剂掉落概率",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.health_elite_chance",
+        "type": "number",
+        "value": 0.18,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "药剂最短掉落间隔",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.health_drop_cooldown",
+        "type": "int",
+        "value": 45,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "受伤时药剂保底等待",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.health_pity_seconds",
+        "type": "int",
+        "value": 70,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "地面药剂上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.max_health_packs",
+        "type": "int",
+        "value": 2,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "药剂保留时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.health_lifetime",
+        "type": "int",
+        "value": 90,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "药剂固定恢复生命",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.health_flat",
+        "type": "int",
+        "value": 18,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "药剂恢复最大生命比例",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.health_fraction",
+        "type": "number",
+        "value": 0.04,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "普通怪装备掉落概率",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.gear_chance",
+        "type": "number",
+        "value": 0.035,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "精英装备掉落概率",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.gear_elite_chance",
+        "type": "number",
+        "value": 0.35,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "装备最短掉落间隔",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.gear_drop_cooldown",
+        "type": "int",
+        "value": 20,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "地面装备上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.max_ground_equipment",
+        "type": "int",
+        "value": 4,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "掉落规则",
+      "name": "装备保留时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.loot.gear_lifetime",
+        "type": "int",
+        "value": 120,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础弹体数量",
+      "source": {
+        "section": "balance",
+        "key": "balance.starting_stats.projectile_count",
+        "type": "int",
+        "value": 1,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础额外穿透次数",
+      "source": {
+        "section": "balance",
+        "key": "balance.starting_stats.pierce",
+        "type": "int",
+        "value": 0,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础暴击概率",
+      "source": {
+        "section": "balance",
+        "key": "balance.starting_stats.crit_chance",
+        "type": "int",
+        "value": 0,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础精英与首领增伤",
+      "source": {
+        "section": "balance",
+        "key": "balance.starting_stats.elite_bonus",
+        "type": "int",
+        "value": 0,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础命中减速力度",
+      "source": {
+        "section": "balance",
+        "key": "balance.starting_stats.slow_fraction",
+        "type": "int",
+        "value": 0,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础减速持续时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.starting_stats.slow_duration",
+        "type": "int",
+        "value": 0,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础爆炸伤害比例",
+      "source": {
+        "section": "balance",
+        "key": "balance.starting_stats.blast_fraction",
+        "type": "int",
+        "value": 0,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "初始属性",
+      "name": "基础护甲",
+      "source": {
+        "section": "balance",
+        "key": "balance.starting_stats.armor",
+        "type": "int",
+        "value": 0,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "伤害计算",
+      "name": "普攻最低间隔",
+      "source": {
+        "section": "balance",
+        "key": "balance.stat_rules.attack_interval_floor",
+        "type": "number",
+        "value": 0.22,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "伤害计算",
+      "name": "玩家移速上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.stat_rules.movement_cap",
+        "type": "int",
+        "value": 330,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "伤害计算",
+      "name": "基础暴击概率上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.stat_rules.crit_cap",
+        "type": "number",
+        "value": 0.7,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "伤害计算",
+      "name": "防御减伤曲线常数",
+      "source": {
+        "section": "balance",
+        "key": "balance.stat_rules.armor_scale",
+        "type": "int",
+        "value": 100,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "伤害计算",
+      "name": "多弹体单枚伤害比例下限",
+      "source": {
+        "section": "balance",
+        "key": "balance.stat_rules.multishot_damage_floor",
+        "type": "number",
+        "value": 0.4,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "伤害计算",
+      "name": "暴击伤害倍率",
+      "source": {
+        "section": "balance",
+        "key": "balance.stat_rules.critical_damage_multiplier",
+        "type": "int",
+        "value": 2,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "同时存在弹体上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.max_projectiles",
+        "type": "int",
+        "value": 240,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "同时存在特效上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.max_effects",
+        "type": "int",
+        "value": 128,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "地面经验上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.max_gems",
+        "type": "int",
+        "value": 180,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "持续危险区域上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.max_hazards",
+        "type": "int",
+        "value": 24,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "普攻动作持续时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.attack_animation_seconds",
+        "type": "number",
+        "value": 0.34,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "自动索敌范围",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.aim_range",
+        "type": "int",
+        "value": 600,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "弹体出发偏移距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.shot_offset",
+        "type": "int",
+        "value": 22,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "普攻弹体速度",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.shot_speed",
+        "type": "int",
+        "value": 560,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "普攻弹体存在时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.shot_lifetime",
+        "type": "number",
+        "value": 1.2,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "普攻额外命中宽度",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.projectile_hit_radius",
+        "type": "int",
+        "value": 7,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "敌弹命中宽度",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.hostile_hit_radius",
+        "type": "int",
+        "value": 19,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "玩家碰撞半径",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.player_body_radius",
+        "type": "int",
+        "value": 15,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "怪物到墙最小距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.enemy_world_padding",
+        "type": "int",
+        "value": 15,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "新怪出生行动延迟",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.arrival_seconds",
+        "type": "number",
+        "value": 0.65,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "敌方首轮出手最小等待",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.enemy_timer_min",
+        "type": "number",
+        "value": 1.6,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "敌方首轮出手最大等待",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.enemy_timer_max",
+        "type": "number",
+        "value": 2.4,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "首领变招额外预告",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.phase_grace_seconds",
+        "type": "number",
+        "value": 0.8,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "远程怪开始后退距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.ranged_retreat_distance",
+        "type": "int",
+        "value": 190,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "远程怪停止前进距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.ranged_hold_distance",
+        "type": "int",
+        "value": 300,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "侧翼包抄偏移距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.flank_radius",
+        "type": "int",
+        "value": 80,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "侧翼摆动速度",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.flank_angular_speed",
+        "type": "number",
+        "value": 1.8,
+        "unit": "数值"
+      },
+      "mode": "degrees"
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "怪物移速成长时间尺度",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.enemy_speed_growth_seconds",
+        "type": "int",
+        "value": 1200,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "方向预告线长度",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.warning_ray_length",
+        "type": "int",
+        "value": 220,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "召唤分布半径",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.summon_ring_radius",
+        "type": "int",
+        "value": 70,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "召唤预告圈半径",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.summon_marker_radius",
+        "type": "int",
+        "value": 24,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "持续技能索敌范围",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.skill_target_range",
+        "type": "int",
+        "value": 330,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "持续技能默认前方距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.skill_target_offset",
+        "type": "int",
+        "value": 120,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "技能击退首领距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.skill_knockback_boss",
+        "type": "int",
+        "value": 12,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "技能击退普通怪距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.skill_knockback_normal",
+        "type": "int",
+        "value": 30,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "爆炸作用半径",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.blast_radius",
+        "type": "int",
+        "value": 48,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "经验飞向玩家速度",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.gem_homing_speed",
+        "type": "int",
+        "value": 380,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "经验收集距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.gem_collect_distance",
+        "type": "int",
+        "value": 20,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "地面物品拾取距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.loot_collect_distance",
+        "type": "int",
+        "value": 28,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "开局药剂禁止掉落时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.health_drop_initial_delay",
+        "type": "int",
+        "value": 20,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "开局装备禁止掉落时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.gear_drop_initial_delay",
+        "type": "int",
+        "value": 12,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "药剂保底生命比例门槛",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.health_pity_hp_fraction",
+        "type": "number",
+        "value": 0.5,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "每次升级选择数量",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.upgrade_offer_count",
+        "type": "int",
+        "value": 3,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "转向摇杆最小推量",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.player_facing_deadzone",
+        "type": "number",
+        "value": 0.1,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "跳扑到墙最小距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.leap_world_margin",
+        "type": "int",
+        "value": 40,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "多弹体相邻角度",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.player_multishot_step",
+        "type": "number",
+        "value": 0.2,
+        "unit": "数值"
+      },
+      "mode": "degrees"
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "敌弹存在时间",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.hostile_shot_lifetime",
+        "type": "int",
+        "value": 5,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "战斗参数",
+      "name": "爆炸继承暴击",
+      "source": {
+        "section": "balance",
+        "key": "balance.combat.blast_inherits_critical",
+        "type": "bool",
+        "value": false,
+        "unit": "数值"
+      },
+      "mode": "bool"
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "营地成长",
+      "name": "营地生命成长上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.meta.max_vitality_rank",
+        "type": "int",
+        "value": 10,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "营地成长",
+      "name": "每级营地增加生命比例",
+      "source": {
+        "section": "balance",
+        "key": "balance.meta.vitality_fraction_per_rank",
+        "type": "number",
+        "value": 0.02,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "营地成长",
+      "name": "营地首次升级价格",
+      "source": {
+        "section": "balance",
+        "key": "balance.meta.vitality_price_base",
+        "type": "int",
+        "value": 10,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "营地成长",
+      "name": "营地每级加价",
+      "source": {
+        "section": "balance",
+        "key": "balance.meta.vitality_price_per_rank",
+        "type": "int",
+        "value": 5,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "营地成长",
+      "name": "每多少击杀奖励一水晶",
+      "source": {
+        "section": "balance",
+        "key": "balance.meta.kills_per_crystal",
+        "type": "int",
+        "value": 10,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "角色与成长.xlsx",
+      "sheet": "营地成长",
+      "name": "每击败首领奖励水晶",
+      "source": {
+        "section": "balance",
+        "key": "balance.meta.crystals_per_boss",
+        "type": "int",
+        "value": 5,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "主动技能.xlsx",
+      "sheet": "技能成长",
+      "name": "每几级提供技能选择",
+      "source": {
+        "section": "balance",
+        "key": "balance.skill_progression.choice_every_levels",
+        "type": "int",
+        "value": 4,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "主动技能.xlsx",
+      "sheet": "技能成长",
+      "name": "技能最高等级",
+      "source": {
+        "section": "balance",
+        "key": "balance.skill_progression.max_rank",
+        "type": "int",
+        "value": 3,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "主动技能.xlsx",
+      "sheet": "技能成长",
+      "name": "技能冷却换算基准",
+      "source": {
+        "section": "balance",
+        "key": "balance.skill_progression.base_cooldown_seconds",
+        "type": "int",
+        "value": 9,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "装备成长",
+      "name": "装备最高阶",
+      "source": {
+        "section": "balance",
+        "key": "balance.equipment_rules.max_tier",
+        "type": "int",
+        "value": 6,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "装备成长",
+      "name": "每几个节点提高装备阶",
+      "source": {
+        "section": "balance",
+        "key": "balance.equipment_rules.nodes_per_tier",
+        "type": "int",
+        "value": 10,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "装备成长",
+      "name": "每阶增加基础数值比例",
+      "source": {
+        "section": "balance",
+        "key": "balance.equipment_rules.base_growth_per_tier",
+        "type": "number",
+        "value": 0.12,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "装备成长",
+      "name": "史诗最早出现节点",
+      "source": {
+        "section": "balance",
+        "key": "balance.equipment_rules.epic_min_node",
+        "type": "int",
+        "value": 10,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "装备成长",
+      "name": "普通掉落史诗概率",
+      "source": {
+        "section": "balance",
+        "key": "balance.equipment_rules.normal_epic_chance",
+        "type": "number",
+        "value": 0.08,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "装备成长",
+      "name": "首领奖励史诗概率",
+      "source": {
+        "section": "balance",
+        "key": "balance.equipment_rules.boss_epic_chance",
+        "type": "number",
+        "value": 0.18,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "装备成长",
+      "name": "普通掉落精良以上概率",
+      "source": {
+        "section": "balance",
+        "key": "balance.equipment_rules.normal_rare_threshold",
+        "type": "number",
+        "value": 0.28,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "装备与掉落.xlsx",
+      "sheet": "装备成长",
+      "name": "首领奖励精良以上概率",
+      "source": {
+        "section": "balance",
+        "key": "balance.equipment_rules.boss_rare_threshold",
+        "type": "number",
+        "value": 0.65,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "基础成长",
+      "name": "模板基准怪物等级",
+      "source": {
+        "section": "balance",
+        "key": "balance.enemy_growth.starting_level",
+        "type": "int",
+        "value": 1,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "基础成长",
+      "name": "每节点增加怪物等级",
+      "source": {
+        "section": "balance",
+        "key": "balance.enemy_growth.levels_per_node",
+        "type": "number",
+        "value": 0.7,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "基础成长",
+      "name": "每级普通怪基础生命增幅",
+      "source": {
+        "section": "balance",
+        "key": "balance.enemy_growth.normal_hp_per_level",
+        "type": "number",
+        "value": 0.03,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "基础成长",
+      "name": "每级首领基础生命增幅",
+      "source": {
+        "section": "balance",
+        "key": "balance.enemy_growth.boss_hp_per_level",
+        "type": "number",
+        "value": 0.04,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "基础成长",
+      "name": "每级基础防御增加",
+      "source": {
+        "section": "balance",
+        "key": "balance.enemy_growth.defense_per_level",
+        "type": "number",
+        "value": 0.4,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "基础成长",
+      "name": "每级暴击抵抗增加",
+      "source": {
+        "section": "balance",
+        "key": "balance.enemy_growth.crit_resistance_per_level",
+        "type": "number",
+        "value": 0.0015,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "基础成长",
+      "name": "怪物暴击抵抗上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.enemy_growth.crit_resistance_cap",
+        "type": "number",
+        "value": 0.4,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "基础成长",
+      "name": "每级基础伤害增幅",
+      "source": {
+        "section": "balance",
+        "key": "balance.enemy_growth.damage_per_level",
+        "type": "number",
+        "value": 0.025,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "基础成长",
+      "name": "每级基础移速增幅",
+      "source": {
+        "section": "balance",
+        "key": "balance.enemy_growth.speed_per_level",
+        "type": "number",
+        "value": 0.006,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "怪物与关卡.xlsx",
+      "sheet": "基础成长",
+      "name": "怪物减速抵抗上限",
+      "source": {
+        "section": "balance",
+        "key": "balance.enemy_growth.slow_resistance_cap",
+        "type": "number",
+        "value": 0.85,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "地图",
+      "name": "地图左端坐标",
+      "source": {
+        "section": "balance",
+        "key": "balance.world.x",
+        "type": "int",
+        "value": 0,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "地图",
+      "name": "地图上端坐标",
+      "source": {
+        "section": "balance",
+        "key": "balance.world.y",
+        "type": "int",
+        "value": 0,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "地图",
+      "name": "地图宽度",
+      "source": {
+        "section": "balance",
+        "key": "balance.world.width",
+        "type": "int",
+        "value": 3600,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "地图",
+      "name": "地图高度",
+      "source": {
+        "section": "balance",
+        "key": "balance.world.height",
+        "type": "int",
+        "value": 2400,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "地图",
+      "name": "玩家到墙最小距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.world.player_margin",
+        "type": "int",
+        "value": 48,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "地图",
+      "name": "镜头顶部延伸",
+      "source": {
+        "section": "balance",
+        "key": "balance.world.camera_top_extension",
+        "type": "int",
+        "value": 132,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "地图",
+      "name": "镜头底部延伸",
+      "source": {
+        "section": "balance",
+        "key": "balance.world.camera_bottom_extension",
+        "type": "int",
+        "value": 162,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "刷怪规则",
+      "name": "随机出怪方向分区",
+      "source": {
+        "section": "balance",
+        "key": "balance.spawn_rules.sectors",
+        "type": "int",
+        "value": 12,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "刷怪规则",
+      "name": "生成位置最多尝试",
+      "source": {
+        "section": "balance",
+        "key": "balance.spawn_rules.attempts",
+        "type": "int",
+        "value": 96,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "刷怪规则",
+      "name": "出怪到墙最小距离",
+      "source": {
+        "section": "balance",
+        "key": "balance.spawn_rules.minimum_world_margin",
+        "type": "int",
+        "value": 24,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "战斗与地图.xlsx",
+      "sheet": "刷怪规则",
+      "name": "新出现怪物间距",
+      "source": {
+        "section": "balance",
+        "key": "balance.spawn_rules.arrival_spacing",
+        "type": "int",
+        "value": 18,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "首次出现区域节点",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.starting_node",
+        "type": "int",
+        "value": 3,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "首次区域准备时间",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.node_grace_seconds",
+        "type": "int",
+        "value": 8,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "区域生效预告时间",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.warning_seconds",
+        "type": "int",
+        "value": 3,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "最短区域持续时间",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.active_min_seconds",
+        "type": "int",
+        "value": 32,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "最长区域持续时间",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.active_max_seconds",
+        "type": "int",
+        "value": 48,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "两轮区域间休息",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.recovery_seconds",
+        "type": "int",
+        "value": 6,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "换区域提前告知",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.preview_seconds",
+        "type": "int",
+        "value": 6,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "每轮至少区域数",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.minimum_zone_count",
+        "type": "int",
+        "value": 3,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "早期最多区域数",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.early_maximum_zone_count",
+        "type": "int",
+        "value": 4,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "后期最多区域数",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.maximum_zone_count",
+        "type": "int",
+        "value": 5,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "最小区域半径",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.radius_min",
+        "type": "int",
+        "value": 110,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "最大区域半径",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.radius_max",
+        "type": "int",
+        "value": 155,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "区域最大覆盖比例",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.max_visible_coverage",
+        "type": "number",
+        "value": 0.38,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "区域之间最小间隔",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.zone_spacing",
+        "type": "int",
+        "value": 14,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "区域布点最多尝试",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.placement_attempts",
+        "type": "int",
+        "value": 96,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "区域与镜头边缘间距",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.placement_view_margin",
+        "type": "int",
+        "value": 60,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "网格内最小随机位置",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.cell_jitter_min",
+        "type": "number",
+        "value": 0.12,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "网格内最大随机位置",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.cell_jitter_max",
+        "type": "number",
+        "value": 0.88,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "区域缩小下限比例",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.min_radius_fraction",
+        "type": "number",
+        "value": 0.75,
+        "unit": "比例（1=100%）"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "随机布点网格边长",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.spatial_grid_size",
+        "type": "int",
+        "value": 3,
+        "unit": "数值"
+      },
+      "mode": ""
+    },
+    {
+      "book": "场地效果.xlsx",
+      "sheet": "区域节奏",
+      "name": "早期区域数量截止节点",
+      "source": {
+        "section": "terrain",
+        "key": "terrain.schedule.early_maximum_until_node",
+        "type": "int",
+        "value": 10,
+        "unit": "数值"
+      },
+      "mode": ""
+    }
+  ],
+  "defaults": {
+    "Parameters": [
+      {
+        "section": "balance",
+        "key": "balance.schema_version",
+        "type": "int",
+        "value": 2,
+        "unit": "数值"
+      },
+      {
+        "section": "balance",
+        "key": "balance.status",
+        "type": "string",
+        "value": "computer_simulation_checked_pending_playtest",
+        "unit": "数值"
+      },
+      {
+        "section": "schema",
+        "key": "schema.characters",
+        "type": "int",
+        "value": 1,
+        "unit": "版本"
+      },
+      {
+        "section": "schema",
+        "key": "schema.enemies",
+        "type": "int",
+        "value": 2,
+        "unit": "版本"
+      },
+      {
+        "section": "schema",
+        "key": "schema.upgrades",
+        "type": "int",
+        "value": 1,
+        "unit": "版本"
+      },
+      {
+        "section": "schema",
+        "key": "schema.skills",
+        "type": "int",
+        "value": 1,
+        "unit": "版本"
+      },
+      {
+        "section": "schema",
+        "key": "schema.equipment",
+        "type": "int",
+        "value": 1,
+        "unit": "版本"
+      },
+      {
+        "section": "schema",
+        "key": "schema.arena_afflictions",
+        "type": "int",
+        "value": 2,
+        "unit": "版本"
+      },
+      {
+        "section": "schema",
+        "key": "schema.encounters",
+        "type": "int",
+        "value": 1,
+        "unit": "版本"
+      },
+      {
+        "section": "encounters",
+        "key": "encounters.fallback_enemy",
+        "type": "string",
+        "value": "slime",
+        "unit": "ID"
+      }
+    ]
+  },
+  "entities": {
+    "Characters": {
+      "knight": {
+        "number": 1,
+        "name": "圣光骑士"
+      },
+      "mage": {
+        "number": 2,
+        "name": "冰霜法师"
+      },
+      "ranger": {
+        "number": 3,
+        "name": "逐风游侠"
+      }
+    },
+    "Enemies": {
+      "slime": {
+        "number": 1,
+        "name": "苔绿史莱姆"
+      },
+      "bat": {
+        "number": 2,
+        "name": "夜翼蝠"
+      },
+      "skeleton": {
+        "number": 3,
+        "name": "骸骨卫兵"
+      },
+      "shaman": {
+        "number": 4,
+        "name": "邪术师"
+      },
+      "charger": {
+        "number": 5,
+        "name": "赤角突袭者"
+      },
+      "elite_guard": {
+        "number": 6,
+        "name": "精英 · 诅咒卫士"
+      },
+      "boss_ogre": {
+        "number": 7,
+        "name": "第一灾厄 · 破城魔像"
+      },
+      "boss_lich": {
+        "number": 8,
+        "name": "第二灾厄 · 骸骨君主"
+      },
+      "boss_wyrm": {
+        "number": 9,
+        "name": "第三灾厄 · 烬焰领主"
+      }
+    },
+    "Skills": {
+      "nova": {
+        "number": 1,
+        "name": "圣光爆发"
+      },
+      "judgment": {
+        "number": 2,
+        "name": "审判剑光"
+      },
+      "aegis": {
+        "number": 3,
+        "name": "圣盾反击"
+      },
+      "frost": {
+        "number": 4,
+        "name": "冰封领域"
+      },
+      "glacial_lance": {
+        "number": 5,
+        "name": "冰晶长矛"
+      },
+      "blizzard": {
+        "number": 6,
+        "name": "暴风雪"
+      },
+      "volley": {
+        "number": 7,
+        "name": "箭雨齐射"
+      },
+      "aimed_shot": {
+        "number": 8,
+        "name": "贯心狙击"
+      },
+      "thorn_trap": {
+        "number": 9,
+        "name": "荆棘陷阱"
+      }
+    },
+    "Equipment": {
+      "iron_sword": {
+        "number": 1,
+        "name": "守卫长剑"
+      },
+      "oak_staff": {
+        "number": 2,
+        "name": "秘银法杖"
+      },
+      "hunter_bow": {
+        "number": 3,
+        "name": "猎人长弓"
+      },
+      "guard_mail": {
+        "number": 4,
+        "name": "守卫锁甲"
+      },
+      "keen_charm": {
+        "number": 5,
+        "name": "鹰眼坠饰"
+      },
+      "scout_boots": {
+        "number": 6,
+        "name": "斥候皮靴"
+      },
+      "swift_blade": {
+        "number": 7,
+        "name": "风切短剑"
+      },
+      "frost_staff": {
+        "number": 8,
+        "name": "霜纹法杖"
+      },
+      "swift_bow": {
+        "number": 9,
+        "name": "迅弦长弓"
+      },
+      "bulwark_mail": {
+        "number": 10,
+        "name": "壁垒重甲"
+      },
+      "scholar_charm": {
+        "number": 11,
+        "name": "学者护符"
+      },
+      "ward_boots": {
+        "number": 12,
+        "name": "守护战靴"
+      }
+    },
+    "EquipmentSlots": {
+      "weapon": {
+        "number": 1,
+        "name": "武器"
+      },
+      "armor": {
+        "number": 2,
+        "name": "护甲"
+      },
+      "amulet": {
+        "number": 3,
+        "name": "饰品"
+      },
+      "boots": {
+        "number": 4,
+        "name": "靴子"
+      }
+    },
+    "Rarities": {
+      "common": {
+        "number": 1,
+        "name": "普通"
+      },
+      "rare": {
+        "number": 2,
+        "name": "精良"
+      },
+      "epic": {
+        "number": 3,
+        "name": "史诗"
+      }
+    },
+    "Terrain": {
+      "frost_ground": {
+        "number": 1,
+        "name": "寒霜地脉"
+      },
+      "keen_ground": {
+        "number": 2,
+        "name": "鹰眼圣阵"
+      },
+      "void_ground": {
+        "number": 3,
+        "name": "虚蚀结界"
+      },
+      "control_ground": {
+        "number": 4,
+        "name": "共鸣法阵"
+      },
+      "ember_ground": {
+        "number": 5,
+        "name": "烬火侵蚀"
+      },
+      "blind_ground": {
+        "number": 6,
+        "name": "迷视结界"
+      },
+      "fury_ground": {
+        "number": 7,
+        "name": "战意圣阵"
+      },
+      "ward_ground": {
+        "number": 8,
+        "name": "守护法阵"
+      }
+    },
+    "NodeStates": {
+      "fortified": {
+        "number": 1,
+        "name": "坚甲军势"
+      },
+      "frenzy": {
+        "number": 2,
+        "name": "狂战军势"
+      },
+      "swift": {
+        "number": 3,
+        "name": "疾行军势"
+      },
+      "malice": {
+        "number": 4,
+        "name": "灾厄军势"
+      }
+    },
+    "Upgrades": {
+      "power": {
+        "number": 1,
+        "name": "利刃祝福"
+      },
+      "haste": {
+        "number": 2,
+        "name": "迅捷祝福"
+      },
+      "vitality": {
+        "number": 3,
+        "name": "坚韧祝福"
+      },
+      "heal": {
+        "number": 4,
+        "name": "圣泉祝福"
+      },
+      "speed": {
+        "number": 5,
+        "name": "疾风祝福"
+      },
+      "multishot": {
+        "number": 6,
+        "name": "分光剑影"
+      },
+      "pierce": {
+        "number": 7,
+        "name": "贯穿之刃"
+      },
+      "frost": {
+        "number": 8,
+        "name": "寒霜铭文"
+      },
+      "blast": {
+        "number": 9,
+        "name": "烬火回响"
+      },
+      "crit": {
+        "number": 10,
+        "name": "猎魔之眼"
+      },
+      "execution": {
+        "number": 11,
+        "name": "巨兽猎手"
+      },
+      "magnet": {
+        "number": 12,
+        "name": "星光牵引"
+      },
+      "cooldown": {
+        "number": 13,
+        "name": "祷告回路"
+      },
+      "ember": {
+        "number": 14,
+        "name": "余烬淬炼"
+      },
+      "endurance": {
+        "number": 15,
+        "name": "远征历练"
+      }
+    }
+  },
+  "enums": {
+    "kind": {
+      "normal": "普通怪物",
+      "elite": "精英怪物",
+      "boss": "首领"
+    },
+    "terrain_kind": {
+      "buff": "增益区域",
+      "debuff": "减益区域"
+    },
+    "behavior": {
+      "chase": "持续追击",
+      "leap": "蓄力跳扑",
+      "flank": "侧翼包抄",
+      "melee": "近身攻击",
+      "ranged": "远程站位",
+      "charge": "蓄力冲锋",
+      "boss": "首领战斗"
+    },
+    "action": {
+      "slam": "范围重击",
+      "shockwave": "环形震波",
+      "charge": "锁定冲锋",
+      "leap": "跳扑",
+      "hazard": "持续危险区",
+      "bolt": "单发弹体",
+      "fan": "扇形弹幕",
+      "radial_burst": "环形弹幕",
+      "summon": "召唤敌人",
+      "combo": "组合攻击"
+    },
+    "skill_kind": {
+      "nova": "范围爆发",
+      "projectiles": "定向投射",
+      "shield": "护盾反击",
+      "hazard": "持续区域"
+    },
+    "effect": {
+      "damage_multiplier": "增加攻击增幅",
+      "attack_interval_multiplier": "增加攻速增幅",
+      "max_hp_add": "增加生命上限",
+      "heal_and_damage": "治疗并增加基础攻击",
+      "move_speed_multiplier": "增加移动增幅",
+      "multishot": "增加普攻弹体",
+      "frost": "命中附加减速",
+      "stat_add": "增加指定属性",
+      "stat_multiply": "增加冷却速度"
+    },
+    "stat": {
+      "damage": "基础攻击",
+      "max_hp": "基础生命",
+      "armor": "护甲",
+      "move_speed": "基础移速",
+      "crit_chance": "暴击率",
+      "pickup_radius": "拾取范围",
+      "attack_rate": "基础攻击频率",
+      "pierce": "额外穿透次数",
+      "elite_bonus": "精英与首领增伤",
+      "blast_fraction": "爆炸伤害比例",
+      "skill_cooldown": "技能冷却",
+      "slow_fraction": "减速力度",
+      "slow_duration": "减速持续时间"
+    },
+    "tags": {
+      "damage": "输出",
+      "speed": "攻速",
+      "defense": "防御",
+      "sustain": "续航",
+      "mobility": "机动",
+      "volley": "弹体强化",
+      "control": "控制",
+      "hunter": "猎魔",
+      "utility": "拾取",
+      "mastery": "后期成长"
+    },
+    "phase": {
+      "normal": "普通招式",
+      "opening": "开场阶段",
+      "fracture": "裂地交锋",
+      "fracture_return": "深层裂地",
+      "ogre_rage": "破城狂怒",
+      "soul_circle": "灵魂围猎",
+      "soul_circle_return": "深层灵魂围猎",
+      "lich_rage": "亡者洪流",
+      "ember_cluster": "烬焰交织",
+      "ember_cluster_return": "深层烬焰",
+      "wyrm_rage": "焚世烈焰"
+    },
+    "bool": {
+      "true": "是",
+      "false": "否"
+    },
+    "Characters": {
+      "knight": "圣光骑士",
+      "mage": "冰霜法师",
+      "ranger": "逐风游侠"
+    },
+    "Enemies": {
+      "slime": "苔绿史莱姆",
+      "bat": "夜翼蝠",
+      "skeleton": "骸骨卫兵",
+      "shaman": "邪术师",
+      "charger": "赤角突袭者",
+      "elite_guard": "精英 · 诅咒卫士",
+      "boss_ogre": "第一灾厄 · 破城魔像",
+      "boss_lich": "第二灾厄 · 骸骨君主",
+      "boss_wyrm": "第三灾厄 · 烬焰领主"
+    },
+    "Skills": {
+      "nova": "圣光爆发",
+      "judgment": "审判剑光",
+      "aegis": "圣盾反击",
+      "frost": "冰封领域",
+      "glacial_lance": "冰晶长矛",
+      "blizzard": "暴风雪",
+      "volley": "箭雨齐射",
+      "aimed_shot": "贯心狙击",
+      "thorn_trap": "荆棘陷阱"
+    },
+    "Equipment": {
+      "iron_sword": "守卫长剑",
+      "oak_staff": "秘银法杖",
+      "hunter_bow": "猎人长弓",
+      "guard_mail": "守卫锁甲",
+      "keen_charm": "鹰眼坠饰",
+      "scout_boots": "斥候皮靴",
+      "swift_blade": "风切短剑",
+      "frost_staff": "霜纹法杖",
+      "swift_bow": "迅弦长弓",
+      "bulwark_mail": "壁垒重甲",
+      "scholar_charm": "学者护符",
+      "ward_boots": "守护战靴"
+    },
+    "EquipmentSlots": {
+      "weapon": "武器",
+      "armor": "护甲",
+      "amulet": "饰品",
+      "boots": "靴子"
+    },
+    "Rarities": {
+      "common": "普通",
+      "rare": "精良",
+      "epic": "史诗"
+    },
+    "Terrain": {
+      "frost_ground": "寒霜地脉",
+      "keen_ground": "鹰眼圣阵",
+      "void_ground": "虚蚀结界",
+      "control_ground": "共鸣法阵",
+      "ember_ground": "烬火侵蚀",
+      "blind_ground": "迷视结界",
+      "fury_ground": "战意圣阵",
+      "ward_ground": "守护法阵"
+    },
+    "NodeStates": {
+      "fortified": "坚甲军势",
+      "frenzy": "狂战军势",
+      "swift": "疾行军势",
+      "malice": "灾厄军势"
+    },
+    "Upgrades": {
+      "power": "利刃祝福",
+      "haste": "迅捷祝福",
+      "vitality": "坚韧祝福",
+      "heal": "圣泉祝福",
+      "speed": "疾风祝福",
+      "multishot": "分光剑影",
+      "pierce": "贯穿之刃",
+      "frost": "寒霜铭文",
+      "blast": "烬火回响",
+      "crit": "猎魔之眼",
+      "execution": "巨兽猎手",
+      "magnet": "星光牵引",
+      "cooldown": "祷告回路",
+      "ember": "余烬淬炼",
+      "endurance": "远征历练"
+    }
+  }
+}

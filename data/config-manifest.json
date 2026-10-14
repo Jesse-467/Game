@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "profile": "release-hard",
+  "workbooks": {
+    "主动技能.xlsx": "8bd961896297550c0632e98ae61914b2f8355be8a9d5b9b423a43d08761eaf1b",
+    "场地效果.xlsx": "46d8728b812ec47cf7ab0bc6578bab3d3d2cc7c862862be1ad12c3de8b3510dc",
+    "怪物与关卡.xlsx": "e464b251c1cc6dd83aae5f9dd7fc1a52f8fdc80da89c1e1a31727aedb6d1ff8e",
+    "战斗与地图.xlsx": "9540a86cee89b8344b4474e77a0c67eaccbc2f6869b3fe9ba3b349b774be9001",
+    "装备与掉落.xlsx": "c7be2c7af7ec2969b040828f96573a70d5bfafa1d3d433e48f7123be65cc165a",
+    "角色与成长.xlsx": "8923b0a302be3650cab8af6d61e7198dfd66f5c2d6b2e4ae43edab77d723e9b2"
+  },
+  "workbook_sha256": "ecd094252fdcc9f5a2ac122ff0fd6d4043f17f159318d3eb3a4a4a9a9baed5ad",
+  "documents": {
+    "balance": {
+      "sha256": "00478dacfdafabd33646810b8b89e056d5cd832a6708aef9b03732810af4159a",
+      "bytes": 4808
+    },
+    "characters": {
+      "sha256": "fb61d7eb116c4b2449c81f1d13d37968fecd06cf18d34ca084e7dea49ab18e12",
+      "bytes": 1287
+    },
+    "enemies": {
+      "sha256": "51eeb1f257191e521556158072c838b153511dcf6e458096d56b63b05a2a6925",
+      "bytes": 21175
+    },
+    "upgrades": {
+      "sha256": "573a315e89e4816cd1e340cf96d57ec226c32a88635c5559d1d552cfcfd198b1",
+      "bytes": 4069
+    },
+    "skills": {
+      "sha256": "1510462f02cd4c021520a6e3456ba49204c8c7d347d2347682be5ba45d73e138",
+      "bytes": 3550
+    },
+    "equipment": {
+      "sha256": "be3a1b730c82e569b0dea77509329c8d75a1b9786bae0c453aac5f5c78c1204d",
+      "bytes": 3037
+    },
+    "arena_afflictions": {
+      "sha256": "877d0fd078550c0da20b4f0ae41e1fe04698165a94639d4c5bc4cf67822bd1d8",
+      "bytes": 2585
+    },
+    "encounters": {
+      "sha256": "742bfc1ab84fefb6c55f1678570804f2c67d0dd06038dce9ffaa5b38fa993eba",
+      "bytes": 2275
+    }
+  }
+}

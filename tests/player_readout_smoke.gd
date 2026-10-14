@@ -49,6 +49,7 @@ func run_checks() -> void:
 	field.configure_node(6)
 	field.definition = field.find_definition("keen_ground")
 	field.prepare_zones()
+	field.zones[0].id = "keen_ground"
 	field.phase = "active"
 	combat.player = field.zones[0].pos
 	var before_stats = combat.stats.duplicate(true)
@@ -59,6 +60,7 @@ func run_checks() -> void:
 	field.configure_node(18)
 	field.definition = field.find_definition("blind_ground")
 	field.prepare_zones()
+	field.zones[0].id = "blind_ground"
 	field.phase = "active"
 	combat.player = field.zones[0].pos
 	combat.stats.crit_chance = 0.1
@@ -67,6 +69,7 @@ func run_checks() -> void:
 	field.configure_node(9)
 	field.definition = field.find_definition("void_ground")
 	field.prepare_zones()
+	field.zones[0].id = "void_ground"
 	field.phase = "active"
 	combat.player = field.zones[0].pos
 	check(is_equal_approx(Readout.current(game.session).damage, float(before_stats.damage) * 0.7), "The damage debuff display agrees with newly launched attacks")

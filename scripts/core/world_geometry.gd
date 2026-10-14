@@ -1,11 +1,13 @@
 extends RefCounted
 ## World coordinates are independent of the fixed logical HUD viewport.
 
-const BOUNDS = Rect2(0, 0, 3600, 2400)
+const Config = preload("res://scripts/core/gameplay_config.gd")
+static var settings = Config.section("world")
+static var BOUNDS = Rect2(float(settings.x), float(settings.y), float(settings.width), float(settings.height))
 const VIEW_SIZE = Vector2(1280, 720)
-const CAMERA_BOUNDS = Rect2(0, -132, 3600, 2694)
-const CENTER = Vector2(1800, 1200)
-const PLAYER_MARGIN = 48.0
+static var CAMERA_BOUNDS = Rect2(BOUNDS.position - Vector2(0, float(settings.camera_top_extension)), BOUNDS.size + Vector2(0, float(settings.camera_top_extension) + float(settings.camera_bottom_extension)))
+static var CENTER = BOUNDS.get_center()
+static var PLAYER_MARGIN = float(settings.player_margin)
 const SPAWN_SCREEN = Rect2(44, 132, 1192, 462)
 
 static func camera_center(player: Vector2) -> Vector2:

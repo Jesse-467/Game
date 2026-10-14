@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "equipment": [
+    {
+      "id": "iron_sword",
+      "name": "守卫长剑",
+      "slot": "weapon",
+      "character": "knight",
+      "icon": 0,
+      "unlock_bosses": 0,
+      "stats": {
+        "damage": 3
+      }
+    },
+    {
+      "id": "oak_staff",
+      "name": "秘银法杖",
+      "slot": "weapon",
+      "character": "mage",
+      "icon": 1,
+      "unlock_bosses": 0,
+      "stats": {
+        "damage": 3
+      }
+    },
+    {
+      "id": "hunter_bow",
+      "name": "猎人长弓",
+      "slot": "weapon",
+      "character": "ranger",
+      "icon": 2,
+      "unlock_bosses": 0,
+      "stats": {
+        "damage": 2.5
+      }
+    },
+    {
+      "id": "guard_mail",
+      "name": "守卫锁甲",
+      "slot": "armor",
+      "icon": 3,
+      "unlock_bosses": 0,
+      "stats": {
+        "max_hp": 12,
+        "armor": 8
+      }
+    },
+    {
+      "id": "keen_charm",
+      "name": "鹰眼坠饰",
+      "slot": "amulet",
+      "icon": 4,
+      "unlock_bosses": 0,
+      "stats": {
+        "crit_chance": 0.04
+      }
+    },
+    {
+      "id": "scout_boots",
+      "name": "斥候皮靴",
+      "slot": "boots",
+      "icon": 5,
+      "unlock_bosses": 0,
+      "stats": {
+        "move_speed": 12
+      }
+    },
+    {
+      "id": "swift_blade",
+      "name": "风切短剑",
+      "slot": "weapon",
+      "character": "knight",
+      "icon": 0,
+      "unlock_bosses": 1,
+      "stats": {
+        "damage": 1.5,
+        "attack_rate": 0.2
+      }
+    },
+    {
+      "id": "frost_staff",
+      "name": "霜纹法杖",
+      "slot": "weapon",
+      "character": "mage",
+      "icon": 1,
+      "unlock_bosses": 1,
+      "stats": {
+        "damage": 1.5,
+        "crit_chance": 0.04
+      }
+    },
+    {
+      "id": "swift_bow",
+      "name": "迅弦长弓",
+      "slot": "weapon",
+      "character": "ranger",
+      "icon": 2,
+      "unlock_bosses": 1,
+      "stats": {
+        "damage": 1.5,
+        "attack_rate": 0.18
+      }
+    },
+    {
+      "id": "bulwark_mail",
+      "name": "壁垒重甲",
+      "slot": "armor",
+      "icon": 3,
+      "unlock_bosses": 2,
+      "stats": {
+        "armor": 18,
+        "move_speed": -8
+      }
+    },
+    {
+      "id": "scholar_charm",
+      "name": "学者护符",
+      "slot": "amulet",
+      "icon": 7,
+      "unlock_bosses": 3,
+      "stats": {
+        "damage": 1.5,
+        "pickup_radius": 15
+      }
+    },
+    {
+      "id": "ward_boots",
+      "name": "守护战靴",
+      "slot": "boots",
+      "icon": 5,
+      "unlock_bosses": 3,
+      "stats": {
+        "armor": 8,
+        "move_speed": 6
+      }
+    }
+  ],
+  "slots": {
+    "weapon": "武器",
+    "armor": "护甲",
+    "amulet": "饰品",
+    "boots": "靴子"
+  },
+  "rarities": [
+    {
+      "id": "common",
+      "name": "普通",
+      "factor": 1,
+      "color": "bac6d0"
+    },
+    {
+      "id": "rare",
+      "name": "精良",
+      "factor": 1.4,
+      "color": "7ecac1"
+    },
+    {
+      "id": "epic",
+      "name": "史诗",
+      "factor": 1.8,
+      "color": "cc9fe6"
+    }
+  ]
+}

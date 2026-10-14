@@ -1,11 +1,13 @@
 extends RefCounted
 ## Content definitions and offer generation; independent of UI and input.
 
+const Stats = preload("res://scripts/core/stat_pipeline.gd")
+
 var definitions: Array[Dictionary] = []
 var stacks: Dictionary = {}
 
 func load_content(path: String = "res://data/upgrades.json") -> void:
-	var document: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(path))
+	var document: Dictionary = preload("res://scripts/core/gameplay_config.gd").read("upgrades") if path == "res://data/upgrades.json" else JSON.parse_string(FileAccess.get_file_as_string(path))
 	definitions.clear()
 	for entry in document.upgrades:
 		definitions.append(entry)
@@ -19,7 +21,8 @@ func find_definition(id: String) -> Dictionary:
 			return entry
 	return {}
 
-func generate_offers(rng: RandomNumberGenerator, stats: Dictionary, count: int = 3) -> Array[Dictionary]:
+func generate_offers(rng: RandomNumberGenerator, stats: Dictionary, count: int = -1) -> Array[Dictionary]:
+	if count < 0: count = int(preload("res://scripts/core/gameplay_config.gd").section("combat").upgrade_offer_count)
 	var pool: Array[Dictionary] = []
 	for entry in definitions:
 		if int(stats.get("level", 1)) < int(entry.get("min_level", 1)):
@@ -45,27 +48,12 @@ func generate_offers(rng: RandomNumberGenerator, stats: Dictionary, count: int =
 
 func apply(id: String, stats: Dictionary) -> Dictionary:
 	var entry = find_definition(id)
-	var result = stats.duplicate()
-	match entry.get("effect", ""):
-		"damage_multiplier": result.damage *= float(entry.value)
-		"attack_interval_multiplier": result.attack_interval = maxf(entry.floor, result.attack_interval * float(entry.value))
-		"max_hp_add":
-			result.max_hp += float(entry.value)
-			result.hp = minf(result.max_hp, result.hp + float(entry.value))
-		"heal_and_damage":
-			result.hp = minf(result.max_hp, result.hp + result.max_hp * float(entry.value))
-			result.damage += float(entry.damage_add)
-		"move_speed_multiplier": result.move_speed = minf(entry.cap, result.move_speed * float(entry.value))
-		"multishot":
-			result.projectile_count += int(entry.value)
-			result.damage *= 0.88
-		"frost":
-			result.slow_fraction = maxf(result.slow_fraction, entry.value)
-			result.slow_duration = maxf(result.slow_duration, entry.duration)
-		"stat_add":
-			result[entry.stat] = result.get(entry.stat, 0) + entry.value
-			if entry.has("cap"):
-				result[entry.stat] = minf(result[entry.stat], entry.cap)
-		"stat_multiply": result[entry.stat] = maxf(entry.get("floor", 0.0), result[entry.stat] * float(entry.value))
+	if entry.is_empty(): return stats
 	stacks[id] = int(stacks.get(id, 0)) + 1
+	var result = Stats.evaluate(stats.get("_base_stats", stats), stats.get("_equipment_stats", {}), stacks, definitions)
+	result.level = int(stats.get("level", 1))
+	result.hp = float(stats.hp)
+	if entry.effect == "max_hp_add": result.hp += float(entry.value)
+	elif entry.effect == "heal_and_damage": result.hp += float(result.max_hp) * float(entry.value)
+	result.hp = minf(result.hp, result.max_hp)
 	return result

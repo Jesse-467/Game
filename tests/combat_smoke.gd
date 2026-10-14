@@ -81,7 +81,7 @@ func run_checks() -> void:
 	combat.attack()
 	combat.update_projectiles(0.10)
 	combat.update_projectiles(0.10)
-	check(combat.enemies[0].hp == 14 and combat.enemies[1].hp == 14, "Pierce hits two distinct targets once each")
+	check(combat.enemies[0].hp == float(content.enemies.slime.hp) - 10 and combat.enemies[1].hp == float(content.enemies.slime.hp) - 10, "Pierce hits two distinct targets once each")
 	combat.stats.projectile_count = 3
 	combat.attack()
 	check(combat.projectiles.size() == 3, "Multishot produces three separate trajectories")
@@ -90,10 +90,10 @@ func run_checks() -> void:
 	combat.spawn_enemy("slime", combat.player + Vector2(70, 20))
 	combat.stats.blast_fraction = 0.35
 	combat.damage_enemy(combat.enemies[0], 10)
-	check(combat.enemies[0].slow_timer > 0 and combat.enemies[1].hp < 24, "Frost and explosion change hit behavior")
+	check(combat.enemies[0].slow_timer > 0 and combat.enemies[1].hp < float(content.enemies.slime.hp), "Frost and explosion change hit behavior")
 	check(run.cast_skill() and combat.enemies[0].slow == 0.55, "Mage active skill strengthens crowd control")
 	run.start("ranger", 0, 12)
-	check(combat.stats.pierce == 1 and run.cast_skill() and combat.projectiles.size() == 9, "Ranger has distinct piercing attack and volley skill")
+	check(combat.stats.pierce == 1 and run.cast_skill() and combat.projectiles.size() == 5, "Ranger starts with a piercing attack and rank-one five-arrow volley")
 	run.start("knight", 0, 13)
 	combat.spawn_enemy("boss_ogre", combat.player + Vector2(160, 0))
 	boss = combat.enemies[0]
@@ -131,7 +131,7 @@ func run_checks() -> void:
 	combat.facing = Vector2.RIGHT
 	combat.spawn_enemy("slime", combat.player - Vector2(150, 0))
 	run.cast_skill()
-	check(combat.projectiles.size() == 9 and combat.projectiles[4].velocity.x < 0, "Ranger volley targets nearby enemies while the player moves away")
+	check(combat.projectiles.size() == 5 and combat.projectiles[2].velocity.x < 0, "Ranger volley targets nearby enemies while the player moves away")
 	run.start("knight", 0, 15)
 	run.director.node_index = 5
 	combat.spawn_enemy("boss_ogre")

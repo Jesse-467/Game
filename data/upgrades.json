@@ -1,20 +1,186 @@
 {
   "schema_version": 1,
   "upgrades": [
-    {"id": "power", "title": "利刃祝福", "description": "攻击力 +20%", "effect": "damage_multiplier", "value": 1.2, "max_stacks": 8, "tags": ["damage"]},
-    {"id": "haste", "title": "迅捷祝福", "description": "攻击间隔 -12%", "effect": "attack_interval_multiplier", "value": 0.88, "floor": 0.22, "max_stacks": 9, "tags": ["speed"]},
-    {"id": "vitality", "title": "坚韧祝福", "description": "生命上限 +20，恢复20", "effect": "max_hp_add", "value": 20.0, "max_stacks": 12, "tags": ["defense"]},
-    {"id": "heal", "title": "圣泉祝福", "description": "恢复40%生命，攻击力 +0.5", "effect": "heal_and_damage", "value": 0.4, "damage_add": 0.5, "max_stacks": 0, "tags": ["sustain"]},
-    {"id": "speed", "title": "疾风祝福", "description": "移动速度 +10%", "effect": "move_speed_multiplier", "value": 1.1, "cap": 330.0, "max_stacks": 4, "tags": ["mobility"]},
-    {"id": "multishot", "title": "分光剑影", "description": "额外发射一枚弹体，单枚伤害 -12%", "effect": "multishot", "value": 1, "max_stacks": 2, "tags": ["volley"]},
-    {"id": "pierce", "title": "贯穿之刃", "description": "弹体额外贯穿一个目标", "effect": "stat_add", "stat": "pierce", "value": 1, "max_stacks": 3, "tags": ["volley"]},
-    {"id": "frost", "title": "寒霜铭文", "description": "命中减速35%，持续2秒", "effect": "frost", "value": 0.35, "duration": 2.0, "max_stacks": 1, "tags": ["control"]},
-    {"id": "blast", "title": "烬火回响", "description": "命中产生小范围爆炸，造成35%伤害", "effect": "stat_add", "stat": "blast_fraction", "value": 0.35, "max_stacks": 2, "tags": ["control"]},
-    {"id": "crit", "title": "猎魔之眼", "description": "暴击率 +12个百分点，暴击伤害为2倍", "effect": "stat_add", "stat": "crit_chance", "value": 0.12, "cap": 0.7, "max_stacks": 5, "tags": ["hunter"]},
-    {"id": "execution", "title": "巨兽猎手", "description": "对精英与Boss伤害 +25%", "effect": "stat_add", "stat": "elite_bonus", "value": 0.25, "max_stacks": 4, "tags": ["hunter"]},
-    {"id": "magnet", "title": "星光牵引", "description": "经验拾取范围 +35", "effect": "stat_add", "stat": "pickup_radius", "value": 35, "max_stacks": 4, "tags": ["utility"]},
-    {"id": "cooldown", "title": "祷告回路", "description": "技能冷却 -12%，最低3秒", "effect": "stat_multiply", "stat": "skill_cooldown", "value": 0.88, "floor": 3.0, "max_stacks": 8, "tags": ["control"]},
-    {"id": "ember", "title": "余烬淬炼", "description": "攻击力 +1", "effect": "stat_add", "stat": "damage", "value": 1.0, "max_stacks": 0, "min_level": 25, "tags": ["mastery"]},
-    {"id": "endurance", "title": "远征历练", "description": "生命上限 +8，恢复8", "effect": "max_hp_add", "value": 8.0, "max_stacks": 0, "min_level": 25, "tags": ["mastery"]}
+    {
+      "id": "power",
+      "title": "利刃祝福",
+      "description": "攻击祝福区 +20%（同类加算）",
+      "effect": "damage_multiplier",
+      "value": 1.2,
+      "max_stacks": 8,
+      "tags": [
+        "damage"
+      ]
+    },
+    {
+      "id": "haste",
+      "title": "迅捷祝福",
+      "description": "攻速祝福区 +12%（同类加算）",
+      "effect": "attack_interval_multiplier",
+      "value": 0.88,
+      "max_stacks": 9,
+      "tags": [
+        "speed"
+      ],
+      "floor": 0.22
+    },
+    {
+      "id": "vitality",
+      "title": "坚韧祝福",
+      "description": "生命上限 +12，恢复12",
+      "effect": "max_hp_add",
+      "value": 12,
+      "max_stacks": 10,
+      "tags": [
+        "defense"
+      ]
+    },
+    {
+      "id": "heal",
+      "title": "圣泉祝福",
+      "description": "恢复25%生命，基础攻击 +0.5",
+      "effect": "heal_and_damage",
+      "value": 0.25,
+      "max_stacks": 0,
+      "tags": [
+        "sustain"
+      ],
+      "damage_add": 0.5
+    },
+    {
+      "id": "speed",
+      "title": "疾风祝福",
+      "description": "移速祝福区 +10%（同类加算）",
+      "effect": "move_speed_multiplier",
+      "value": 1.1,
+      "max_stacks": 4,
+      "tags": [
+        "mobility"
+      ],
+      "cap": 330
+    },
+    {
+      "id": "multishot",
+      "title": "分光剑影",
+      "description": "额外发射一枚弹体，单枚伤害 -12%",
+      "effect": "multishot",
+      "value": 1,
+      "max_stacks": 2,
+      "tags": [
+        "volley"
+      ],
+      "damage_penalty": 0.12
+    },
+    {
+      "id": "pierce",
+      "title": "贯穿之刃",
+      "description": "弹体额外贯穿一个目标",
+      "effect": "stat_add",
+      "value": 1,
+      "max_stacks": 3,
+      "tags": [
+        "volley"
+      ],
+      "stat": "pierce"
+    },
+    {
+      "id": "frost",
+      "title": "寒霜铭文",
+      "description": "命中减速35%，持续2秒",
+      "effect": "frost",
+      "value": 0.35,
+      "max_stacks": 1,
+      "tags": [
+        "control"
+      ],
+      "duration": 2
+    },
+    {
+      "id": "blast",
+      "title": "烬火回响",
+      "description": "命中产生小范围爆炸，造成20%伤害",
+      "effect": "stat_add",
+      "value": 0.2,
+      "max_stacks": 2,
+      "tags": [
+        "control"
+      ],
+      "stat": "blast_fraction"
+    },
+    {
+      "id": "crit",
+      "title": "猎魔之眼",
+      "description": "暴击率 +8个百分点，暴击伤害为2倍",
+      "effect": "stat_add",
+      "value": 0.08,
+      "max_stacks": 5,
+      "tags": [
+        "hunter"
+      ],
+      "cap": 0.7,
+      "stat": "crit_chance"
+    },
+    {
+      "id": "execution",
+      "title": "巨兽猎手",
+      "description": "精英与Boss增伤区 +15%（同类加算）",
+      "effect": "stat_add",
+      "value": 0.15,
+      "max_stacks": 4,
+      "tags": [
+        "hunter"
+      ],
+      "stat": "elite_bonus"
+    },
+    {
+      "id": "magnet",
+      "title": "星光牵引",
+      "description": "经验拾取范围 +35",
+      "effect": "stat_add",
+      "value": 35,
+      "max_stacks": 4,
+      "tags": [
+        "utility"
+      ],
+      "stat": "pickup_radius"
+    },
+    {
+      "id": "cooldown",
+      "title": "祷告回路",
+      "description": "冷却速度祝福区 +12%（同类加算）",
+      "effect": "stat_multiply",
+      "value": 0.88,
+      "max_stacks": 8,
+      "tags": [
+        "control"
+      ],
+      "floor": 3,
+      "stat": "skill_cooldown"
+    },
+    {
+      "id": "ember",
+      "title": "余烬淬炼",
+      "description": "攻击力 +1",
+      "effect": "stat_add",
+      "value": 1,
+      "max_stacks": 0,
+      "tags": [
+        "mastery"
+      ],
+      "stat": "damage",
+      "min_level": 25
+    },
+    {
+      "id": "endurance",
+      "title": "远征历练",
+      "description": "生命上限 +6，恢复6",
+      "effect": "max_hp_add",
+      "value": 6,
+      "max_stacks": 0,
+      "tags": [
+        "mastery"
+      ],
+      "min_level": 25
+    }
   ]
 }

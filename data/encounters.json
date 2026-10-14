@@ -1,0 +1,127 @@
+{
+  "fallback_enemy": "slime",
+  "schema_version": 1,
+  "nodes": [
+    {
+      "position": 1,
+      "name": "荒野前哨",
+      "enemies": [
+        "slime",
+        "bat"
+      ],
+      "elite_chance": 0,
+      "elite_id": "elite_guard",
+      "elite_max_active": 2,
+      "modifiers": []
+    },
+    {
+      "position": 2,
+      "name": "骸骨路口",
+      "enemies": [
+        "slime",
+        "bat",
+        "skeleton"
+      ],
+      "elite_chance": 0,
+      "elite_id": "elite_guard",
+      "elite_max_active": 2,
+      "modifiers": [
+        "fortified"
+      ]
+    },
+    {
+      "position": 3,
+      "name": "诅咒营地",
+      "enemies": [
+        "skeleton",
+        "slime",
+        "shaman"
+      ],
+      "elite_chance": 0.12,
+      "elite_id": "elite_guard",
+      "elite_max_active": 2,
+      "modifiers": [
+        "frenzy"
+      ]
+    },
+    {
+      "position": 4,
+      "name": "突袭战线",
+      "enemies": [
+        "bat",
+        "charger",
+        "shaman",
+        "skeleton"
+      ],
+      "elite_chance": 0.05,
+      "elite_id": "elite_guard",
+      "elite_max_active": 2,
+      "modifiers": [
+        "swift"
+      ]
+    },
+    {
+      "position": 5,
+      "name": "灾厄领主",
+      "enemies": [
+        "slime",
+        "shaman"
+      ],
+      "elite_chance": 0,
+      "elite_id": "elite_guard",
+      "elite_max_active": 2,
+      "modifiers": [
+        "malice"
+      ]
+    }
+  ],
+  "boss_rotation": [
+    "boss_ogre",
+    "boss_lich",
+    "boss_wyrm"
+  ],
+  "modifiers": {
+    "fortified": {
+      "name": "坚甲军势",
+      "targets": [
+        "normal",
+        "elite"
+      ],
+      "values": {
+        "defense_add": 6,
+        "hp_bonus": 0.08
+      }
+    },
+    "frenzy": {
+      "name": "狂战军势",
+      "targets": [
+        "normal",
+        "elite"
+      ],
+      "values": {
+        "damage_bonus": 0.12,
+        "attack_speed_bonus": 0.1
+      }
+    },
+    "swift": {
+      "name": "疾行军势",
+      "targets": [
+        "normal",
+        "elite"
+      ],
+      "values": {
+        "speed_bonus": 0.08
+      }
+    },
+    "malice": {
+      "name": "灾厄军势",
+      "targets": [
+        "boss"
+      ],
+      "values": {
+        "damage_bonus": 0.12,
+        "crit_resistance_add": 0.02
+      }
+    }
+  }
+}

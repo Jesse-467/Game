@@ -1,0 +1,419 @@
+{
+  "version": 1,
+  "header_row": 3,
+  "documents": [
+    "balance",
+    "characters",
+    "enemies",
+    "upgrades",
+    "skills",
+    "equipment",
+    "arena_afflictions",
+    "encounters"
+  ],
+  "tables": {
+    "Parameters": {
+      "columns": [
+        "section",
+        "key",
+        "type",
+        "value",
+        "unit",
+        "note"
+      ],
+      "types": {
+        "section": "string",
+        "key": "string",
+        "type": "string",
+        "value": "int",
+        "unit": "string",
+        "note": "string"
+      }
+    },
+    "Characters": {
+      "columns": [
+        "id",
+        "name",
+        "description",
+        "sprite_tile",
+        "color",
+        "damage_multiplier",
+        "hp_multiplier",
+        "interval_multiplier",
+        "skill",
+        "skill_name",
+        "unlock_cost"
+      ],
+      "types": {
+        "id": "string",
+        "name": "string",
+        "description": "string",
+        "sprite_tile": "int",
+        "color": "string",
+        "damage_multiplier": "int",
+        "hp_multiplier": "int",
+        "interval_multiplier": "int",
+        "skill": "string",
+        "skill_name": "string",
+        "unlock_cost": "int"
+      }
+    },
+    "CharacterStats": {
+      "columns": [
+        "character_id",
+        "stat",
+        "value"
+      ],
+      "types": {
+        "character_id": "string",
+        "stat": "string",
+        "value": "number"
+      }
+    },
+    "Enemies": {
+      "columns": [
+        "id",
+        "name",
+        "kind",
+        "behavior",
+        "sprite_tile",
+        "hp",
+        "speed",
+        "damage",
+        "radius",
+        "xp",
+        "weight",
+        "min_node",
+        "defense",
+        "crit_resistance",
+        "slow_resistance"
+      ],
+      "types": {
+        "id": "string",
+        "name": "string",
+        "kind": "string",
+        "behavior": "string",
+        "sprite_tile": "int",
+        "hp": "int",
+        "speed": "int",
+        "damage": "int",
+        "radius": "int",
+        "xp": "int",
+        "weight": "int",
+        "min_node": "int",
+        "defense": "int",
+        "crit_resistance": "number",
+        "slow_resistance": "int"
+      }
+    },
+    "BossPhases": {
+      "columns": [
+        "enemy_id",
+        "phase_id",
+        "order",
+        "name",
+        "hp_below",
+        "min_rotation"
+      ],
+      "types": {
+        "enemy_id": "string",
+        "phase_id": "string",
+        "order": "int",
+        "name": "string",
+        "hp_below": "number",
+        "min_rotation": "int"
+      }
+    },
+    "EnemyActions": {
+      "columns": [
+        "enemy_id",
+        "phase_id",
+        "attack_index",
+        "part_index",
+        "type",
+        "radius",
+        "damage",
+        "range",
+        "warning",
+        "interval",
+        "speed",
+        "duration",
+        "count",
+        "spread",
+        "inner_radius",
+        "tick",
+        "color",
+        "angle_offset",
+        "spawn_enemy_id"
+      ],
+      "types": {
+        "enemy_id": "string",
+        "phase_id": "string",
+        "attack_index": "int",
+        "part_index": "int",
+        "type": "string",
+        "radius": "int",
+        "damage": "int",
+        "range": "int",
+        "warning": "number",
+        "interval": "number",
+        "speed": "int",
+        "duration": "number",
+        "count": "int",
+        "spread": "number",
+        "inner_radius": "int",
+        "tick": "number",
+        "color": "string",
+        "angle_offset": "number",
+        "spawn_enemy_id": "string"
+      }
+    },
+    "AttackOffsets": {
+      "columns": [
+        "enemy_id",
+        "phase_id",
+        "attack_index",
+        "part_index",
+        "offset_index",
+        "x",
+        "y"
+      ],
+      "types": {
+        "enemy_id": "string",
+        "phase_id": "string",
+        "attack_index": "int",
+        "part_index": "int",
+        "offset_index": "int",
+        "x": "int",
+        "y": "int"
+      }
+    },
+    "Upgrades": {
+      "columns": [
+        "id",
+        "title",
+        "description",
+        "effect",
+        "value",
+        "max_stacks",
+        "tags",
+        "floor",
+        "damage_add",
+        "cap",
+        "damage_penalty",
+        "stat",
+        "duration",
+        "min_level"
+      ],
+      "types": {
+        "id": "string",
+        "title": "string",
+        "description": "string",
+        "effect": "string",
+        "value": "number",
+        "max_stacks": "int",
+        "tags": "csv",
+        "floor": "number",
+        "damage_add": "number",
+        "cap": "int",
+        "damage_penalty": "number",
+        "stat": "string",
+        "duration": "int",
+        "min_level": "int"
+      }
+    },
+    "Skills": {
+      "columns": [
+        "id",
+        "character",
+        "name",
+        "description",
+        "kind",
+        "cooldown",
+        "damage",
+        "damage_per_rank",
+        "radius",
+        "radius_per_rank",
+        "color",
+        "count",
+        "count_per_rank",
+        "spread",
+        "pierce",
+        "shield",
+        "shield_per_rank",
+        "duration",
+        "slow",
+        "slow_duration",
+        "tick"
+      ],
+      "types": {
+        "id": "string",
+        "character": "string",
+        "name": "string",
+        "description": "string",
+        "kind": "string",
+        "cooldown": "int",
+        "damage": "number",
+        "damage_per_rank": "number",
+        "radius": "int",
+        "radius_per_rank": "int",
+        "color": "string",
+        "count": "int",
+        "count_per_rank": "int",
+        "spread": "int",
+        "pierce": "int",
+        "shield": "int",
+        "shield_per_rank": "int",
+        "duration": "int",
+        "slow": "number",
+        "slow_duration": "number",
+        "tick": "number"
+      }
+    },
+    "Equipment": {
+      "columns": [
+        "id",
+        "name",
+        "slot",
+        "character",
+        "icon",
+        "unlock_bosses"
+      ],
+      "types": {
+        "id": "string",
+        "name": "string",
+        "slot": "string",
+        "character": "string",
+        "icon": "int",
+        "unlock_bosses": "int"
+      }
+    },
+    "EquipmentStats": {
+      "columns": [
+        "equipment_id",
+        "stat",
+        "value"
+      ],
+      "types": {
+        "equipment_id": "string",
+        "stat": "string",
+        "value": "int"
+      }
+    },
+    "EquipmentSlots": {
+      "columns": [
+        "id",
+        "name"
+      ],
+      "types": {
+        "id": "string",
+        "name": "string"
+      }
+    },
+    "Rarities": {
+      "columns": [
+        "id",
+        "name",
+        "factor",
+        "color"
+      ],
+      "types": {
+        "id": "string",
+        "name": "string",
+        "factor": "int",
+        "color": "string"
+      }
+    },
+    "Terrain": {
+      "columns": [
+        "rotation_order",
+        "id",
+        "name",
+        "kind",
+        "summary",
+        "color",
+        "atlas_index",
+        "move_multiplier",
+        "crit_chance_delta",
+        "outgoing_damage_multiplier",
+        "control_duration_multiplier",
+        "tick_damage",
+        "tick_interval_seconds",
+        "attack_interval_multiplier",
+        "incoming_damage_multiplier"
+      ],
+      "types": {
+        "rotation_order": "int",
+        "id": "string",
+        "name": "string",
+        "kind": "string",
+        "summary": "string",
+        "color": "string",
+        "atlas_index": "int",
+        "move_multiplier": "number",
+        "crit_chance_delta": "number",
+        "outgoing_damage_multiplier": "number",
+        "control_duration_multiplier": "number",
+        "tick_damage": "int",
+        "tick_interval_seconds": "int",
+        "attack_interval_multiplier": "number",
+        "incoming_damage_multiplier": "number"
+      }
+    },
+    "NodeRoster": {
+      "columns": [
+        "position",
+        "name",
+        "enemies",
+        "elite_chance",
+        "elite_id",
+        "elite_max_active",
+        "modifiers"
+      ],
+      "types": {
+        "position": "int",
+        "name": "string",
+        "enemies": "csv",
+        "elite_chance": "int",
+        "elite_id": "string",
+        "elite_max_active": "int",
+        "modifiers": "csv"
+      }
+    },
+    "BossRotation": {
+      "columns": [
+        "order",
+        "enemy_id"
+      ],
+      "types": {
+        "order": "int",
+        "enemy_id": "string"
+      }
+    },
+    "NodeStates": {
+      "columns": [
+        "id",
+        "name",
+        "targets",
+        "defense_add",
+        "hp_bonus",
+        "damage_bonus",
+        "attack_speed_bonus",
+        "speed_bonus",
+        "crit_resistance_add"
+      ],
+      "types": {
+        "id": "string",
+        "name": "string",
+        "targets": "csv",
+        "defense_add": "int",
+        "hp_bonus": "number",
+        "damage_bonus": "number",
+        "attack_speed_bonus": "number",
+        "speed_bonus": "number",
+        "crit_resistance_add": "number"
+      }
+    }
+  },
+  "parameters_count": 179
+}

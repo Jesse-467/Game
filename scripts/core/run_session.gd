@@ -20,6 +20,7 @@ var minute_records: Array[Dictionary] = []
 var recorded_minute = -1
 var reward_paid = false
 var run_id = ""
+var pending_equipment: Dictionary = {}
 
 func _init(content: RefCounted) -> void:
 	catalog = content
@@ -27,7 +28,7 @@ func _init(content: RefCounted) -> void:
 	combat = Combat.new(content, director, rng)
 	upgrades.load_content()
 
-func start(character: String, camp_rank: int, seed_value: int = -1) -> void:
+func start(character: String, camp_rank: int, seed_value: int = -1, equipment_unlocks: Array = []) -> void:
 	run_id = Crypto.new().generate_random_bytes(16).hex_encode()
 	if seed_value < 0:
 		rng.randomize()
@@ -35,8 +36,10 @@ func start(character: String, camp_rank: int, seed_value: int = -1) -> void:
 		rng.seed = seed_value
 	director.reset()
 	combat.reset(character, camp_rank)
+	combat.equipment.reset(equipment_unlocks)
+	pending_equipment.clear()
 	upgrades.reset_run()
-	level = 1
+	level = int(catalog.balance.player.starting_level)
 	xp = 0
 	kills = 0
 	selected_upgrades.clear()
@@ -55,11 +58,14 @@ func step(delta: float, movement: Vector2, held_attack: bool) -> void:
 	if director.is_boss_node() and not combat.enemies.any(func(enemy): return enemy.kind == "boss"):
 		combat.spawn_enemy(director.current_boss_id())
 	if director.spawn_timer <= 0 and combat.enemies.size() < int(catalog.balance.difficulty.max_active_enemies):
-		combat.spawn_enemy(director.consume_spawn(rng))
+		combat.spawn_enemy(director.consume_spawn(rng, combat.enemies))
 	combat.step(delta, movement, held_attack)
 	consume_combat_events()
 	if combat.stats.hp <= 0:
 		finish()
+	elif not pending_equipment.is_empty():
+		state = "equipment"
+		events.append({"type":"equipment"})
 	elif xp >= xp_required():
 		begin_level_up()
 	var minute = int(director.elapsed / 60)
@@ -70,6 +76,7 @@ func step(delta: float, movement: Vector2, held_attack: bool) -> void:
 func consume_combat_events() -> void:
 	for event in combat.events:
 		match event.type:
+			"equipment_found": pending_equipment = event.item.duplicate(true)
 			"kill":
 				kills += 1
 				if event.kind == "boss":
@@ -108,7 +115,10 @@ func begin_level_up() -> void:
 	xp -= xp_required()
 	level += 1
 	combat.stats.level = level
-	selected_upgrades = upgrades.generate_offers(rng, combat.stats)
+	if level % int(catalog.balance.skill_progression.choice_every_levels) == 0:
+		selected_upgrades = combat.skills.offers()
+		if selected_upgrades.size() < int(catalog.balance.combat.upgrade_offer_count): selected_upgrades.append_array(upgrades.generate_offers(rng, combat.stats, int(catalog.balance.combat.upgrade_offer_count) - selected_upgrades.size()))
+	else: selected_upgrades = upgrades.generate_offers(rng, combat.stats, int(catalog.balance.combat.upgrade_offer_count))
 	state = "upgrade"
 	events.append({"type": "upgrade", "level": level})
 
@@ -121,12 +131,26 @@ func apply_upgrade(id: String) -> bool:
 			offered = true
 	if not offered:
 		return false
-	combat.stats = upgrades.apply(id, combat.stats)
+	if id.begins_with("train:") or id.begins_with("skill:"):
+		if not combat.skills.choose(id): return false
+	else: combat.stats = upgrades.apply(id, combat.stats)
 	selected_upgrades.clear()
 	state = "playing"
 	events.append({"type": "chosen", "id": id})
 	if xp >= xp_required():
 		begin_level_up()
+	return true
+
+func choose_equipment(accept: bool) -> bool:
+	if state != "equipment" or pending_equipment.is_empty(): return false
+	if accept:
+		if not combat.equipment.equip(pending_equipment): return false
+		combat.rebuild_equipment(upgrades)
+		events.append({"type":"equipped", "name":combat.equipment.item_name(pending_equipment)})
+	pending_equipment.clear()
+	state = "playing"
+	events.append({"type":"equipment_chosen"})
+	if xp >= xp_required(): begin_level_up()
 	return true
 
 func dash(direction: Vector2 = Vector2.ZERO) -> bool:
@@ -152,7 +176,7 @@ func finish() -> void:
 	events.append({"type": "dead", "result": result()})
 
 func result() -> Dictionary:
-	return {"run_id": run_id, "state": state, "seconds": director.elapsed, "node": director.node_index, "level": level, "kills": kills, "bosses": director.bosses_defeated, "crystals": int(kills / 10) + director.bosses_defeated * 5, "character": combat.character_id, "death_source": combat.death_source if state == "dead" else "", "terrain_damage_taken": combat.terrain_damage_taken, "build": upgrades.stacks.duplicate(), "minutes": minute_records.duplicate(true)}
+	return {"run_id": run_id, "state": state, "seconds": director.elapsed, "node": director.node_index, "level": level, "kills": kills, "bosses": director.bosses_defeated, "crystals": int(kills / int(catalog.balance.meta.kills_per_crystal)) + director.bosses_defeated * int(catalog.balance.meta.crystals_per_boss), "character": combat.character_id, "death_source": combat.death_source if state == "dead" else "", "terrain_damage_taken": combat.terrain_damage_taken, "build": upgrades.stacks.duplicate(), "equipment":combat.equipment.equipped.duplicate(true), "skill":combat.skills.active_id, "skill_ranks":combat.skills.ranks.duplicate(true), "health_packs":combat.health_packs_used, "potion_healing":combat.healing_received, "minutes": minute_records.duplicate(true)}
 
 func checkpoint() -> Dictionary:
 	return Snapshot.capture(self)

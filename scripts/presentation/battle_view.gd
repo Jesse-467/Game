@@ -4,7 +4,7 @@ extends Node2D
 const ActorScene = preload("res://scenes/actor_view.tscn")
 const SpriteLibrary = preload("res://scripts/presentation/sprite_library.gd")
 const World = preload("res://scripts/core/world_geometry.gd")
-const ARENA = World.BOUNDS
+var ARENA = World.BOUNDS
 var session: RefCounted
 var input_controller: RefCounted
 var library = SpriteLibrary.new()
@@ -15,6 +15,7 @@ var font: Font
 var movement = Vector2.ZERO
 var camera: Camera2D
 var field_textures: Array[AtlasTexture] = []
+var loot_sprites = preload("res://scripts/presentation/loot_sprites.gd").new()
 
 func configure(run: RefCounted, controls: RefCounted, ui_font: Font) -> void:
 	session = run
@@ -93,6 +94,21 @@ func _draw() -> void:
 	var combat: RefCounted = session.combat
 	draw_arc(combat.player, 20, 0, TAU, 32, Color(0.5, 0.86, 0.98, 0.6), 2)
 	draw_field(combat.field)
+	for hazard in combat.hazards:
+		var color = Color(hazard.color)
+		color.a = 0.16
+		draw_circle(hazard.pos, hazard.radius, color)
+		color.a = 0.85
+		draw_arc(hazard.pos, hazard.radius, 0, TAU, 48, color, 3)
+		for ring in 3: draw_arc(hazard.pos, hazard.radius * (0.35 + ring * 0.2), 0, TAU, 40, Color(color, 0.3), 2)
+	if combat.shield_hp > 0:
+		draw_arc(combat.player, 42, 0, TAU, 40, Color("a4e6d8"), 3)
+	for item in combat.loot:
+		var index = 6 if item.kind == "health" else int(combat.equipment.definitions[item.item.id].icon)
+		var color = Color("f18483") if item.kind == "health" else Color(combat.equipment.rarities[int(item.item.rarity)].color)
+		draw_arc(item.pos, 23, 0, TAU, 24, Color(color, 0.6), 2)
+		var offset = Vector2(0, sin(float(item.life) * 2.4) * 2.0)
+		draw_texture_rect(loot_sprites.texture(index), Rect2(item.pos - Vector2(24, 30) + offset, Vector2(48, 48)), false)
 	for gem in combat.gems:
 		var color = Color("76e7d0") if gem.value < 10 else Color("dbb4ff")
 		draw_colored_polygon(PackedVector2Array([gem.pos + Vector2(0, -7), gem.pos + Vector2(5, 0), gem.pos + Vector2(0, 7), gem.pos + Vector2(-5, 0)]), color)
@@ -165,10 +181,11 @@ func draw_attack_warning(shape: Dictionary, progress: float) -> void:
 func draw_field(field: RefCounted) -> void:
 	if field.phase not in ["warning", "active"]:
 		return
-	var color = Color(field.definition.color)
 	var active = field.phase == "active"
 	for zone in field.zones:
-		var index = int(field.definition.get("atlas_index", field.find_definition(field.definition.id).get("atlas_index", 0)))
+		var definition: Dictionary = field.zone_definition(zone)
+		var color = Color(definition.color)
+		var index = int(definition.get("atlas_index", 0))
 		draw_texture_rect(field_textures[index], Rect2(zone.pos - Vector2.ONE * zone.radius, Vector2.ONE * zone.radius * 2), false, Color(1, 1, 1, 0.62 if active else 0.22))
 		var fill = color
 		fill.a = 0.17 if active else 0.06
@@ -182,22 +199,23 @@ func draw_field(field: RefCounted) -> void:
 			var direction = Vector2.from_angle(angle)
 			draw_line(zone.pos + direction * zone.radius * 0.84, zone.pos + direction * zone.radius * 0.94, border, 3)
 		var center: Vector2 = zone.pos
-		if field.definition.id == "frost_ground":
+		if definition.id == "frost_ground":
 			for i in 3:
 				var direction = Vector2.from_angle(i * PI / 3.0)
 				draw_line(center - direction * 17, center + direction * 17, border, 2)
-		elif field.definition.id == "void_ground":
+		elif definition.id == "void_ground":
 			draw_arc(center, 17, 0, TAU, 24, border, 2)
 			draw_line(center + Vector2(-12, -12), center + Vector2(12, 12), border, 2)
-		elif field.definition.id == "ember_ground":
+		elif definition.id == "ember_ground":
 			draw_polyline(PackedVector2Array([center + Vector2(-13, 10), center + Vector2(-4, -11), center + Vector2(1, -2), center + Vector2(8, -18), center + Vector2(14, 10)]), border, 2)
-		elif field.definition.id in ["keen_ground", "blind_ground"]:
+		elif definition.id in ["keen_ground", "blind_ground"]:
 			draw_set_transform(center, 0, Vector2(1, 0.55))
 			draw_arc(Vector2.ZERO, 18, 0, TAU, 32, border, 2)
 			draw_set_transform(Vector2.ZERO)
 			draw_circle(center, 5, border)
-			if field.definition.id == "blind_ground":
+			if definition.id == "blind_ground":
 				draw_line(center + Vector2(-18, 14), center + Vector2(18, -14), border, 2)
 		else:
 			for i in 3:
 				draw_arc(center, 6 + i * 6, -PI * 0.8, PI * 0.8, 24, border, 2)
+		draw_string(font, center + Vector2(-46, float(zone.radius) * 0.57), str(definition.summary), HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color.lightened(0.15))

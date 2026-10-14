@@ -2,7 +2,7 @@ extends RefCounted
 ## Versioned Variant checkpoints preserve Vector2, Color and exact RNG integers.
 ## Only data is decoded; objects are never deserialized.
 
-const STORE_VERSION = 2
+const STORE_VERSION = 3
 const Snapshot = preload("res://scripts/core/run_snapshot.gd")
 var path = "user://active-run.save"
 
@@ -13,7 +13,7 @@ func load_checkpoint() -> Dictionary:
 		if not file: continue
 		var document = file.get_var(false)
 		file.close()
-		if document is Dictionary and int(document.get("schema_version", 0)) in [1, STORE_VERSION] and document.get("checkpoint") is Dictionary:
+		if document is Dictionary and int(document.get("schema_version", 0)) in [1, 2, STORE_VERSION] and document.get("checkpoint") is Dictionary:
 			var normalized = Snapshot.normalize(document.checkpoint)
 			if not normalized.is_empty(): return normalized
 	return {}

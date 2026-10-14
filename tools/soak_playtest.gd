@@ -12,6 +12,7 @@ class SoakGame extends "res://scripts/main.gd":
 	func _notification(_what: int) -> void: pass
 	func _physics_process(delta: float) -> void:
 		var start = Time.get_ticks_usec()
+		if session.state == "equipment": on_action("equip" if Policy.equipment_choice(session) else "discard_equipment")
 		if session.state == "upgrade":
 			on_action("upgrade", Policy.upgrade(session, strategy))
 			choice_count += 1
@@ -25,6 +26,7 @@ var game: SoakGame
 var seconds = 1800.0
 var seed_value = 11
 var collecting = false
+var qa_easy = false
 var last_draw_usec = 0
 var frame_count = 0
 var interval_total = 0.0
@@ -38,6 +40,9 @@ var started_ms = 0
 var report_path = "res://builds/reports/render/soak-gameplay.json"
 
 func _initialize() -> void:
+	for argument in OS.get_cmdline_user_args():
+		if argument == "--qa-easy": qa_easy = true
+	if qa_easy: preload("res://scripts/core/gameplay_config.gd").use_qa_profile()
 	Engine.max_fps = 60
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--seconds="): seconds = float(argument.trim_prefix("--seconds="))
@@ -124,6 +129,8 @@ func playtest() -> void:
 	var completed = final_sample.wall_seconds >= seconds and game.session.state != "dead"
 	var report = {"completed": completed, "scope": "normal gameplay, real desktop GL, real wall clock, automated volley policy, seed fixed, zero camp growth; no general bullet dodging; bounded0.1ms histograms", "source_version": ProjectSettings.get_setting("application/config/version"), "seed": seed_value, "requested_seconds": seconds, "adapter": RenderingServer.get_video_adapter_name(), "frames": frame_count, "mean_frame_ms": interval_total / maxf(1, frame_count), "frame_p95_ms": percentile(interval_histogram, 0.95), "frame_max_ms": frame_max, "update_p95_ms": percentile(update_histogram, 0.95), "observed_min_counts": [min_counts.x, min_counts.y, min_counts.z], "observed_max_counts": [max_counts.x, max_counts.y, max_counts.z], "choice_count": game.choice_count, "result": game.session.result(), "samples": samples}
 	var file = FileAccess.open(report_path, FileAccess.WRITE)
+	report.profile = preload("res://scripts/core/gameplay_config.gd").profile_id
+	report.scope = "real desktop GL and wall clock; isolated progress; automated choices and warning/contact avoidance; qa-easy only validates flow/rendering and is not difficulty evidence; bounded histograms"
 	file.store_string(JSON.stringify(report, "\t"))
 	file.close()
 	game.audio_service.music.stop()

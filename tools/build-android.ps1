@@ -4,6 +4,8 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
+& python (Join-Path $PSScriptRoot 'export_balance.py') --check
+if ($LASTEXITCODE -ne 0) { throw 'Excel and release-hard configuration must match before packaging.' }
 $enginePath = Join-Path $projectRoot '.tools/godot/Godot_v4.7.2-stable_win64_console.exe'
 $keyStorePath = Join-Path $projectRoot '.tools/debug.keystore'
 $templatePath = Join-Path $projectRoot '.tools/android-templates/android_debug.apk'

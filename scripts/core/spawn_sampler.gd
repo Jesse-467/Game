@@ -2,7 +2,9 @@ extends RefCounted
 ## Shuffled angular sectors reduce repeated arrival directions; points stay visible.
 
 const World = preload("res://scripts/core/world_geometry.gd")
-const SECTORS = 12
+const Config = preload("res://scripts/core/gameplay_config.gd")
+var rules = Config.section("spawn_rules")
+var SECTORS = int(rules.sectors)
 var bag: Array[int] = []
 var last_sector = -1
 
@@ -24,10 +26,10 @@ func refill(rng: RandomNumberGenerator) -> void:
 
 func sample(player: Vector2, radius: float, rng: RandomNumberGenerator, enemies: Array[Dictionary], settings: Dictionary) -> Vector2:
 	var view = World.visible_rect(player)
-	var legal_world = World.BOUNDS.grow(-maxf(24, radius + 15))
+	var legal_world = World.BOUNDS.grow(-maxf(float(rules.minimum_world_margin), radius + float(Config.section("combat").enemy_world_padding)))
 	var minimum = float(settings.spawn_distance_min)
 	var maximum = float(settings.spawn_distance_max)
-	for attempt in 96:
+	for attempt in int(rules.attempts):
 		if bag.is_empty(): refill(rng)
 		var sector = bag.pop_back()
 		var angle = (sector + rng.randf()) * TAU / float(SECTORS)
@@ -36,7 +38,7 @@ func sample(player: Vector2, radius: float, rng: RandomNumberGenerator, enemies:
 		if not legal_world.has_point(point) or not World.spawn_screen_allowed(point - view.position): continue
 		var separated = true
 		for enemy in enemies:
-			if float(enemy.born) > 0 and point.distance_to(enemy.pos) < radius + float(enemy.radius) + 18:
+			if float(enemy.born) > 0 and point.distance_to(enemy.pos) < radius + float(enemy.radius) + float(rules.arrival_spacing):
 				separated = false
 				break
 		if not separated: continue

@@ -35,6 +35,9 @@ func simulate() -> void:
 			var steps = 0
 			var phase_counts: Dictionary = {}
 			while run.director.elapsed < limit_seconds and run.state != "dead":
+				if run.state == "equipment":
+					run.choose_equipment(Policy.equipment_choice(run))
+					continue
 				if run.state == "upgrade":
 					run.apply_upgrade(Policy.upgrade(run, strategy))
 					continue
@@ -69,6 +72,6 @@ func simulate() -> void:
 			print("%s %s seed%d: %.0fs, lv%d, boss%d, first level %.1fs, first boss %.1fs" % [character, strategy, seed_value, result.seconds, result.level, result.bosses, first_level, first_boss])
 	DirAccess.make_dir_recursive_absolute("res://builds/reports")
 	var file = FileAccess.open(report_path, FileAccess.WRITE)
-	file.store_string(JSON.stringify({"method": "actual 60Hz simulation, automated kiting, nearby XP collection, boss engagement and circle/ring avoidance, zero camp growth; no general projectile dodging", "terrain_aware": terrain_aware, "limit_seconds": limit_seconds, "runs": report}, "\t"))
+	file.store_string(JSON.stringify({"profile":"release-hard", "method": "actual60Hz simulation, nearby XP/loot collection, upgrade and equipment choices, boss engagement, warning/contact/hazard avoidance and emergency dodge, zero camp growth; automated policy is not a human skill estimate", "terrain_aware": terrain_aware, "limit_seconds": limit_seconds, "runs": report}, "\t"))
 	file.close()
 	quit()

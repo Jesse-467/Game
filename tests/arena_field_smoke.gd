@@ -33,6 +33,7 @@ func run_checks() -> void:
 	field.configure_node(3)
 	field.definition = field.find_definition("frost_ground")
 	field.step(field.schedule.node_grace_seconds, combat.player)
+	field.zones[0].id = "frost_ground"
 	check(field.phase == "warning" and field.zones.size() >= 3, "Terrain appears with warning after its initial grace period")
 	var center: Vector2 = field.zones[0].pos
 	check(field.modifiers_at(center).move_multiplier == 1.0, "Warning terrain does not apply its debuff")
@@ -56,7 +57,7 @@ func run_checks() -> void:
 	combat.enemies[0].hp = 100
 	combat.enemies[0].max_hp = 100
 	run.cast_skill()
-	check(is_equal_approx(combat.enemies[0].hp, 74.8), "Void applies the same output rule to the active skill")
+	check(is_equal_approx(combat.enemies[0].hp, 100.0 - 12.0 * 2.8 * 0.7 / 1.1), "Void and the target's defense both apply to the active skill")
 	combat.player = Vector2(100, 150)
 	combat.attack()
 	check(is_equal_approx(combat.projectiles[-1].damage, 12.0) and is_equal_approx(combat.projectiles[0].damage, 8.4), "Leaving void restores new attacks; shots retain their launch strength")
@@ -95,9 +96,9 @@ func run_checks() -> void:
 	combat.update_projectiles(0.05)
 	check(is_equal_approx(combat.enemies[0].slow_timer, 1.8), "Resonance extends the mage's projectile control duration by 50 percent")
 	run.cast_skill()
-	check(is_equal_approx(combat.enemies[0].slow_timer, 4.5), "Resonance extends the frost active skill using the same rule")
+	check(is_equal_approx(combat.enemies[0].slow_timer, 3.6), "Resonance extends the frost active skill using the same rule")
 	combat.damage_enemy(combat.enemies[0], 1.0)
-	check(is_equal_approx(combat.enemies[0].slow, 0.55) and is_equal_approx(combat.enemies[0].slow_timer, 4.5), "Weaker normal attacks do not cancel a stronger active control effect")
+	check(is_equal_approx(combat.enemies[0].slow, 0.55) and is_equal_approx(combat.enemies[0].slow_timer, 3.6), "Weaker normal attacks do not cancel a stronger active control effect")
 	for node in [3, 6, 9, 12, 20, 100]:
 		field.configure_node(node)
 		field.prepare_zones()

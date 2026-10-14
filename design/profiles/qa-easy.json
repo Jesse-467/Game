@@ -1,0 +1,9 @@
+{
+  "id": "qa-easy",
+  "purpose": "Only for non-numeric flow, rendering and lifecycle tests. Never ship in an APK.",
+  "player_hp_factor": 2.0,
+  "player_damage_factor": 1.5,
+  "enemy_hp_factor": 0.45,
+  "enemy_damage_factor": 0.35,
+  "enemy_defense_factor": 0.4
+}

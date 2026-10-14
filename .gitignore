@@ -1,4 +1,9 @@
 .godot/
+__pycache__/
+*.pyc
+tools/node_modules/
+design/*.inspect.ndjson
+design/数值策划/*.inspect.ndjson
 .tools/
 builds/
 *.apk

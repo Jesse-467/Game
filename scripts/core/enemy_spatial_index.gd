@@ -17,7 +17,8 @@ func rebuild(enemies: Array[Dictionary]) -> void:
 			cells[key] = bucket
 		cells[key].append(index)
 
-func query_segment(start: Vector2, end: Vector2, extra_radius: float = 7.0) -> Array[int]:
+func query_segment(start: Vector2, end: Vector2, extra_radius: float = -1.0) -> Array[int]:
+	if extra_radius < 0: extra_radius = float(preload("res://scripts/core/gameplay_config.gd").section("combat").projectile_hit_radius)
 	var padding = max_radius + extra_radius
 	var first = Vector2i(floori((minf(start.x, end.x) - padding) / CELL_SIZE), floori((minf(start.y, end.y) - padding) / CELL_SIZE))
 	var last = Vector2i(floori((maxf(start.x, end.x) + padding) / CELL_SIZE), floori((maxf(start.y, end.y) + padding) / CELL_SIZE))

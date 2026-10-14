@@ -13,12 +13,18 @@
 - `scripts/core/enemy_attack_patterns.gd`：按生命比例和Boss轮次选择阶段，生成锁定的攻击几何计划，供预警、弹道/范围判定和召唤位置共用。
 - `scripts/core/arena_field.gd`：场地轮换、预警、临时buff/debuff，与角色永久成长分离。
 - `scripts/core/upgrade_catalog.gd`：祝福内容加载、候选生成、叠加记录和效果计算，与UI无关。
+- `scripts/core/stat_pipeline.gd`：基础属性、装备和祝福乘区的统一重算及护甲曲线。
+- `scripts/core/equipment_inventory.gd`：局内装备部位、品质、掉落数值与局外类型解锁。
+- `scripts/core/skill_book.gd`：职业技能定义、已学等级、强化/替换选择和有效技能参数。
+- `scripts/core/gameplay_config.gd`：导出配置的共享缓存；成长实例在当前关卡计算。
 - `scripts/core/progression_store.gd`：版本化局外存档、临时文件写入与备份读取，与战斗无关。
 - `scripts/core/run_snapshot.gd`：显式捕获/恢复模拟状态，不保存渲染资源或手指意图。
 - `scripts/core/active_run_store.gd`：检查点文件的版本、原子替换、备份与完整清除；Variant格式保留向量、颜色和64位随机数状态。
 - `data/balance.json`：初始属性、难度、Boss及能力数值。
 - `data/upgrades.json`：带稳定ID的祝福内容、效果参数、标签和叠加限制。
 - `data/characters.json`、`data/enemies.json`、`data/arena_afflictions.json`：角色、敌人、场地内容定义。
+- `data/skills.json`、`data/equipment.json`、`data/encounters.json`：技能、装备和独立关卡编排/状态。
+- `design/数值策划/` 与 `tools/export_balance.py`：策划源表和构建时导出，运行端仅消费校验后的轻量定义；流程见 `configuration.md`。
 - `scripts/input/touch_controller.gd`：按触点归属生成操作意图，独立于战斗与GUI鼠标模拟。
 - `scripts/ui/game_ui.gd`：营地、升级、设置、结算、HUD；通过信号发出选择。
 - `scripts/ui/round_action_button.gd` 与 `joystick_view.gd`：固定在CanvasLayer中的圆形操作控件；`control_layout.gd`统一圆形外观与命中几何。
@@ -43,13 +49,15 @@ Boss的`phases`按基础到进阶的优先级排列，取最后一个满足`hp_b
 
 ## 内容与存档版本
 
-内容ID一旦出现在存档中就保持稳定；显示名称可调整。祝福新增效果类型需要实现并验证对应行为。存档包含 `schema_version`，变更字段时提供显式迁移并验证旧存档；局外进度支持v1及初始未带版本字段，局内检查点当前为v2并提供v1迁移。
+内容ID一旦出现在存档中就保持稳定；显示名称可调整。祝福新增效果类型需要实现并验证对应行为。存档包含 `schema_version`，变更字段时提供显式迁移并验证旧存档；局外进度支持v1及初始未带版本字段，局内检查点当前为v3并提供v1/v2迁移。
 
 局外记录与局内检查点各自版本化。每局有稳定ID，奖励提交后将该ID写入局外记录，再删除检查点；启动时已结算的ID不得恢复，避免文件删除前进程退出造成复活或重复奖励。待选择的升级记录原选项ID与RNG状态，恢复不重抽。测试与渲染探针使用内存检查点仓库或独立测试目录。
 
 0.4.0的敌人记录增加可选`phase_id`、`telegraph_shapes`，仍使用检查点v1。旧记录缺少这两个字段时，先按保存的`active_attack`和锁定目标完成原攻击，再进入适用的新阶段；不改写玩家已有构筑。
 
 0.6.0检查点v2保存刷怪扇区袋、场地类型袋/网格袋、下一场地与轮换计数。v1迁移将玩家、敌人、锁定目标、攻击几何、弹体、经验与特效整体平移到大地图，保留相对关系、等级、冷却和已有前摇；新的随机袋从当前RNG状态继续。相机从玩家位置计算，手指意图仍不保存。
+
+0.7.0检查点v3增加装备、待选掉落、技能等级、药剂和掉落随机状态、护盾、持续危险区以及下一轮混合场地。旧档在恢复时重算玩家乘区和怪物基础/状态属性，保留敌人生命比例与正在进行的动作；旧版固定成长常量只用于迁移。待选择的装备与技能恢复原内容，不重新抽取。
 
 工具、构建产物与私有签名密钥不纳入Git。下载素材保留作者许可和来源，资产不引用开发机绝对路径。
 

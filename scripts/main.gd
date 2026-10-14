@@ -29,6 +29,12 @@ var panel_return = ""
 
 func _ready() -> void:
 	catalog.load_content()
+	if OS.is_debug_build():
+		var config = preload("res://scripts/core/gameplay_config.gd")
+		var manifest: Dictionary = config.read("config-manifest")
+		var actual_hashes: Dictionary = {}
+		for id in manifest.documents: actual_hashes[id] = FileAccess.get_sha256("res://data/%s.json" % id)
+		print("CONFIG_RUNTIME:" + JSON.stringify({"profile":config.profile_id,"source_workbook":manifest.workbook_sha256,"actual_hashes":actual_hashes}))
 	session = RunSession.new(catalog)
 	active_store = create_active_store()
 	load_progress()
@@ -91,7 +97,7 @@ func _notification(what: int) -> void:
 		if session.state == "playing":
 			session.pause()
 			save_checkpoint()
-		elif session.state in ["paused", "upgrade"]:
+		elif session.state in ["paused", "upgrade", "equipment"]:
 			if save_checkpoint(): show_camp()
 		elif session.state == "dead": show_camp()
 		else: get_tree().quit()
@@ -99,10 +105,16 @@ func _notification(what: int) -> void:
 func consume_events() -> void:
 	var checkpoint_changed = false
 	for event in session.events:
-		if event.type in ["upgrade", "chosen", "node", "boss_phase"]: checkpoint_changed = true
+		if event.type in ["upgrade", "chosen", "node", "boss_phase", "equipment", "equipment_chosen"]: checkpoint_changed = true
 		if event.type in ["attack", "hurt", "dash", "skill", "upgrade"]:
 			audio_service.play_cue(event.type)
 		match event.type:
+			"equipment":
+				panel_return = ""
+				controls.clear()
+				game_ui.show_equipment(session)
+			"equipped": game_ui.show_banner("已装备：" + event.name)
+			"healed": game_ui.show_banner("生命药剂 · 恢复%d生命" % roundi(event.amount))
 			"started":
 				game_ui.show_banner("拖动左侧移动 · 按住右侧攻击" if OS.has_feature("mobile") else "WASD移动 · 按住J攻击 · K技能 · 空格闪避")
 			"upgrade":
@@ -120,7 +132,10 @@ func consume_events() -> void:
 				game_ui.show_banner(event.name + " · " + event.phase)
 				audio_service.play_cue("boss")
 			"node":
-				var text = "节点 %d · 继续远征" % event.index
+				var rule: Dictionary = session.director.node_rule()
+				var names: Array[String] = []
+				for id in rule.modifiers: names.append(catalog.encounters.modifiers[id].name)
+				var text = "节点 %d · %s%s" % [event.index, rule.name, " · " + "、".join(names) if not names.is_empty() else ""]
 				if not event.boss.is_empty():
 					text = catalog.enemies[event.boss].name
 					audio_service.play_cue("boss")
@@ -136,6 +151,10 @@ func consume_events() -> void:
 
 func on_action(action: String, argument: String = "") -> void:
 	match action:
+		"equip", "discard_equipment":
+			if session.choose_equipment(action == "equip"):
+				game_ui.hide_panel()
+				consume_events()
 		"start": start_run()
 		"continue_saved": continue_saved_run()
 		"save_camp":
@@ -170,15 +189,22 @@ func on_action(action: String, argument: String = "") -> void:
 		"upgrades_menu":
 			panel_return = ""
 			game_ui.show_upgrades(session)
+		"equipment_menu":
+			panel_return = ""
+			game_ui.show_equipment(session)
 		"build":
-			if session.state not in ["paused", "upgrade"]: return
-			panel_return = "upgrades_menu" if session.state == "upgrade" else "paused_menu"
+			if session.state not in ["paused", "upgrade", "equipment"]: return
+			panel_return = "equipment_menu" if session.state == "equipment" else ("upgrades_menu" if session.state == "upgrade" else "paused_menu")
 			controls.clear()
 			game_ui.show_build(session, panel_return)
 		"records":
 			if session.state != "menu": return
 			panel_return = "camp"
 			game_ui.show_records(session, meta)
+		"equipment_collection":
+			if session.state != "menu": return
+			panel_return = "camp"
+			game_ui.show_equipment_collection(session, meta)
 		"credits":
 			panel_return = argument
 			game_ui.show_credits(argument)
@@ -187,7 +213,7 @@ func start_run() -> void:
 	panel_return = ""
 	clear_checkpoint()
 	controls.clear()
-	session.start(selected_character, int(meta.vitality))
+	session.start(selected_character, int(meta.vitality), -1, meta.equipment_unlocks)
 	game_ui.hide_panel()
 	battle_view.reset_actor_views()
 	save_checkpoint()
@@ -203,6 +229,7 @@ func continue_saved_run() -> void:
 	battle_view.reset_actor_views()
 	battle_view.sync()
 	if session.state == "upgrade": game_ui.show_upgrades(session)
+	elif session.state == "equipment": game_ui.show_equipment(session)
 	else: game_ui.show_paused()
 	game_ui.sync(session, 0)
 	checkpoint_left = CHECKPOINT_INTERVAL
@@ -215,8 +242,9 @@ func show_camp() -> void:
 	game_ui.sync(session, 0)
 
 func buy_vitality() -> void:
-	var cost = 10 + int(meta.vitality) * 5
-	if meta.vitality < 10 and meta.crystals >= cost:
+	var rules: Dictionary = catalog.balance.meta
+	var cost = int(rules.vitality_price_base) + int(meta.vitality) * int(rules.vitality_price_per_rank)
+	if meta.vitality < int(rules.max_vitality_rank) and meta.crystals >= cost:
 		meta.crystals -= cost
 		meta.vitality += 1
 		save_progress()
@@ -240,6 +268,13 @@ func settle_run(result: Dictionary) -> void:
 		meta.crystals += int(result.crystals)
 		meta.best_seconds = maxf(meta.best_seconds, result.seconds)
 		meta.total_runs += 1
+		meta.total_bosses += int(result.bosses)
+		var before: Array = meta.equipment_unlocks.duplicate()
+		meta.equipment_unlocks = session.combat.equipment.unlocked_for_bosses(meta.total_bosses)
+		var unlocked_names: Array[String] = []
+		for id in meta.equipment_unlocks:
+			if not before.has(id): unlocked_names.append(session.combat.equipment.definitions[id].name)
+		if not unlocked_names.is_empty(): result.equipment_unlocked = unlocked_names
 		meta.last_run = result
 		meta.last_settled_run_id = session.run_id
 	# Meta settlement is written first; its run ID blocks stale-checkpoint resurrection.
@@ -269,7 +304,7 @@ func create_active_store() -> RefCounted:
 	return ActiveRunStore.new()
 
 func save_checkpoint() -> bool:
-	if not active_store or not session or session.state not in ["playing", "paused", "upgrade"] or session.combat.stats.hp <= 0: return false
+	if not active_store or not session or session.state not in ["playing", "paused", "upgrade", "equipment"] or session.combat.stats.hp <= 0: return false
 	var document = session.checkpoint()
 	var error = active_store.save_checkpoint(document)
 	if error != OK:
